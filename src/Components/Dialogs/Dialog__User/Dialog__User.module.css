@@ -1,0 +1,9 @@
+
+.dialog__user {
+    padding: 20px;
+}
+.dialog__user a{
+    text-decoration: none;
+    color: black;
+}
+
