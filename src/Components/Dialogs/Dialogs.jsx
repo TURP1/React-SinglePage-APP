@@ -5,15 +5,11 @@ import DialogUser from "./Dialog__User/Dialog__User";
 
 
 
-const Dialogs = () => {
+const Dialogs = (props) => {
 
-  const DialogsData = [
-    { id: 1, userName: "Sasha" },
-    { id: 2, userName: "Ivan" },
-    { id: 3, userName: "Leroy" },
-    { id: 4, userName: "Leo" },
-    { id: 5, userName: "Vlad" },
-  ];
+  const MessagesData = props.messageDataArray[0];
+
+  const DialogsData = props.messageDataArray[1];
 
   const DialogsElement = DialogsData.map(dialog => (< DialogUser id={dialog.id} userName={dialog.userName} className={obj.dialog__user} />))
 
@@ -23,7 +19,7 @@ const Dialogs = () => {
       <div className={obj.dialog__users}>
         {DialogsElement}
       </div>
-      <DialogUserMessages />
+      <DialogUserMessages MessagesData={MessagesData}/>
     </div>
   );
 };

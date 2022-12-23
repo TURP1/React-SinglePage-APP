@@ -8,25 +8,19 @@ const DialogUserMessage = (props) => {
   )
 }
 
-const DialogUserMessages = () => {
+const DialogUserMessages = (props) => {
 
-  const MessagesData = [
-    { id: 1, message: "Hi, Im Sasha" },
-    { id: 2, message: "How are You Bro?" },
-    { id: 3, message: "Sup" }
-  ]
-
-const MessagesElement = MessagesData.map ((message)=>{
-return (
-  <DialogUserMessage message={message.message}/>
-)
-})
-
+  const MessagesElement = props.MessagesData.map((message) => {
     return (
-<div div className={obj.dialog__user__messages}>
-        {MessagesElement}
-      </div>
-)
-    }
-  
-    export default DialogUserMessages;
+      <DialogUserMessage message={message.message} />
+    )
+  })
+
+  return (
+    <div div className={obj.dialog__user__messages}>
+      {MessagesElement}
+    </div>
+  )
+}
+
+export default DialogUserMessages;

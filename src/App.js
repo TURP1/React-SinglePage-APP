@@ -8,7 +8,7 @@ import News from './Components/News/News';
 import Profile from './Components/Profile/Profile';
 import Settings from './Components/Settings/Settings';
 
-function App() {
+function App(props) {
   return (
 
     <div className="app-wrapper">
@@ -17,15 +17,12 @@ function App() {
       
       <div className='app-wrapper__content'>
         <Routes>
-          <Route path='/'  element={<Profile />} />
-          <Route path='/dialogs/*' element={<Dialogs />} />
+          <Route path='/'  element={<Profile profileDataArray={props.generalProfileDataArray}/>} />
+          <Route path='/dialogs/*' element={<Dialogs messageDataArray={props.generalMessageDataArray} />} />
           <Route path='/news' element={<News />}/>
           <Route path='/music' element={<Music />}/>
           <Route path='/settings' element={<Settings />}/>
         </Routes>
-
-
-
       </div>
 
     </div>
