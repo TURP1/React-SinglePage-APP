@@ -15,3 +15,12 @@
 .active {
   color: gold;
 }
+.friends {
+  text-align: center;
+  padding: 5px;
+  display: flex;
+}
+.friends__block {
+  text-align: center;
+  padding: 5px;
+}
