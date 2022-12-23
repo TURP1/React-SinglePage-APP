@@ -1,12 +1,5 @@
 import obj from './Dialog__User__Messages.module.css'
-
-const DialogUserMessage = (props) => {
-  return (
-    <div className={obj.dialog__user__message}>
-      {props.message}
-    </div>
-  )
-}
+import DialogUserMessage from './Dialog__User__Messages_Message/Dialog__User__Messages-Message'
 
 const DialogUserMessages = () => {
 
