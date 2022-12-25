@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 import obj from './Dialog__User.module.css'
 
 const DialogUser = (props)=>{
-
   let path = "/dialogs/" + props.id;
   
     return(

@@ -5,3 +5,10 @@
 .dialog__user__message {
     padding: 1px;
 }
+.dialog__user__message_leftSide{
+    text-align: left;
+}
+.dialog__user__message_rightSide{
+    text-align: right;
+    padding-right: 100px;
+}

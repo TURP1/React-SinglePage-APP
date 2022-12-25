@@ -7,7 +7,7 @@ const NavbarFriends = (props) => {
   return (
     <div className={obj.friend}>
       <div className={obj.friend__logo}>
-        <img src={props.logo} alt="" srcset="" />
+        <img src={props.logo} alt="logo" />
       </div>
       <div className={obj.friend__surname}>{props.surname}</div>
       <div className={obj.friend__name}>{props.name}</div>

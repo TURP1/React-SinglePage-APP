@@ -4,7 +4,8 @@ import obj from './Navbar.module.css'
 import NavbarFriends from './Navbar__Friends/Navbar__Friends';
 
 const Navbar = (props) => {
-  let NavFriends = props.state.NavbarFriends.map((friend) => {
+
+  let NavFriends = props.state.map((friend) => {
     return (
       <NavbarFriends logo={friend.logo} surname={friend.surname} name={friend.name} />
     )
