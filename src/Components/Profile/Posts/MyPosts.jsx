@@ -6,11 +6,22 @@ const MyPosts = (props) => {
 
     const PostElement = props.PostsData.map((post) => {
         return (
-            <Post message={post.message} likeCount={post.likeCount} PostImagesData={props.PostImagesData}/>
+            <Post message={post.message} likeCount={post.likeCount} PostImagesData={props.PostImagesData} />
         );
     });
 
 
+    let postsContentHtml = React.createRef();
+
+    let addPost = () => {
+        let postContent = postsContentHtml.current.value;
+        alert(postContent);
+        clearInput()
+    }
+
+    function clearInput() {
+        postsContentHtml.current.value = ``;
+    }
     return (
         <div className={obj.myPosts}>
             <div>
@@ -18,10 +29,10 @@ const MyPosts = (props) => {
                     <h3>My posts</h3>
                 </div>
                 <div>
-                    <textarea></textarea>
+                    <textarea ref={postsContentHtml}></textarea>
                 </div>
                 <div>
-                    <button> Submit</button>
+                    <button onClick={addPost}> Submit</button>
                 </div>
 
 
