@@ -1,3 +1,5 @@
+import { rerenderEntireTree } from "../render";
+
 // DATA
 let state = {
     ProfilePage: {
@@ -14,31 +16,53 @@ let state = {
     },
     Users: [
         {
-            id: 1, surname: 'Krishna', name: 'Arvind', logo: 'https://www.ibm.com/brand/experience-guides/developer/b1db1ae501d522a1a4b49613fe07c9f1/01_8-bar-positive.svg',
+            id: 0, surname: 'Krishna', name: 'Arvind', logo: 'https://www.ibm.com/brand/experience-guides/developer/b1db1ae501d522a1a4b49613fe07c9f1/01_8-bar-positive.svg',
             MessagesData: [
-                { id: 1, message: "Hi, Im Arvind" },
-                { id: 2, message: "How are You Bro?" },
-                { id: 3, message: "Sup" }
+                { id: 1, message: "Hi, Im Arvind", user: false },
+                { id: 2, message: "How are You Bro?", user: true },
+                { id: 3, message: "Sup", user: false }
             ]
         },
         {
-            id: 2, surname: 'Love', name: 'Christian', logo: 'https://www.logodesignlove.com/wp-content/uploads/2022/01/logo-wave-symbol-01.jpg',
+            id: 1, surname: 'Love', name: 'Christian', logo: 'https://www.logodesignlove.com/wp-content/uploads/2022/01/logo-wave-symbol-01.jpg',
             MessagesData: [
-                { id: 1, message: "Hi, Im Christian" },
-                { id: 2, message: "How are You Bro?" },
-                { id: 3, message: "Sup" }
+                { id: 1, message: "Hi, Im Christian", user: false },
+                { id: 2, message: "How are You Bro?", user: true },
+                { id: 3, message: "Sup", user: false }
             ]
         },
         {
-            id: 3, surname: 'Colive', name: 'Arnold', logo: 'https://fiverr-res.cloudinary.com/f_auto,q_auto,c_fill,g_center/v1/attachments/generic_asset/asset/70135c2d47b4a4892897524eb00e6a9a-1652447155030/logo-4.png',
+            id: 2, surname: 'Colive', name: 'Arnold', logo: 'https://fiverr-res.cloudinary.com/f_auto,q_auto,c_fill,g_center/v1/attachments/generic_asset/asset/70135c2d47b4a4892897524eb00e6a9a-1652447155030/logo-4.png',
             MessagesData: [
-                { id: 1, message: "Hi, Im Colive" },
-                { id: 2, message: "How are You Bro?" },
-                { id: 3, message: "Sup" }
+                { id: 1, message: "Hi, Im Colive", user: false },
+                { id: 2, message: "How are You Bro?", user: true },
+                { id: 3, message: "Sup", user: false }
             ]
         }
-    ],
+    ]
+
 };
+
+
+export let newPost = (postMessage) => {
+    let newPostInfo = {
+        id: 3,
+        message: postMessage,
+        likeCount: 0
+    };
+    state.ProfilePage.PostsData.push(newPostInfo)
+    rerenderEntireTree(state);
+}
+
+export let newMessage = (newMessage, userId) => {
+    let newMessageInfo = {
+        id: 4,
+        message: newMessage,
+        user: true
+    };
+    state.Users[userId].MessagesData.push(newMessageInfo);
+    rerenderEntireTree(state);
+}
 
 export default state;
 

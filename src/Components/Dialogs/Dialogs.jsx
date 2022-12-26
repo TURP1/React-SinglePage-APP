@@ -12,7 +12,7 @@ const Dialogs = (props) => {
       <div className={obj.dialog__users}>
         {DialogsElement}
       </div>
-      <DialogUserMessages Users={props.state}/>
+      <DialogUserMessages Users={props.state} newMessage={props.newMessage}/>
     </div>
     
   );

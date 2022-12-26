@@ -6,15 +6,16 @@ const DialogUserMessages = (props) => {
 
   let dialogs = props.Users[0].MessagesData.map((message) => {
     return (
-      <DialogUserMessage message={message.message} id={message.id} />
+      <DialogUserMessage message={message.message} id={message.id} user={message.user} />
     )
   })
 
   let textContentHtml = React.createRef();
 
     let addMessage = ()=>{
+      debugger;
       let text = textContentHtml.current.value ;
-      alert(text);
+      props.newMessage(text, 0);
       clearInput()
     }
 

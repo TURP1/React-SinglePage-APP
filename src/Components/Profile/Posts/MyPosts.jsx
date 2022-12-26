@@ -14,8 +14,7 @@ const MyPosts = (props) => {
     let postsContentHtml = React.createRef();
 
     let addPost = () => {
-        let postContent = postsContentHtml.current.value;
-        alert(postContent);
+        props.newPost(postsContentHtml.current.value);
         clearInput()
     }
 
