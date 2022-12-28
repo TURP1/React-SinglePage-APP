@@ -12,26 +12,34 @@ const DialogUserMessages = (props) => {
 
   let textContentHtml = React.createRef();
 
-    let addMessage = ()=>{
-      debugger;
-      let text = textContentHtml.current.value ;
-      props.newMessage(text, 0);
-      clearInput()
-    }
+  let addMessage = () => {
+    props.newMessage();
+    clearInput()
+  }
 
-    function clearInput() {
-      textContentHtml.current.value = ``;
-    }
+  function clearInput() {
+    textContentHtml.current.value = ``;
+  }
+
+  const messageListener = () => {
+    let text = textContentHtml.current.value;
+    props.updateMessageText(text);
+  }
+
 
 
   return (
-    <div div className={obj.dialog__user__messages}>
+    <div className={obj.dialog__user__messages}>
       <div>
         {dialogs}
       </div>
 
       <div className={obj.dialog__user_messages_text}>
-        <textarea ref={textContentHtml} cols="50" rows="3"></textarea>
+        <textarea ref={textContentHtml} cols="50" rows="3"
+          onChange={messageListener}
+          value={props.NewMessageText}
+          onFocus={clearInput}
+        />
         <button onClick={addMessage} > Send</button>
       </div>
     </div>

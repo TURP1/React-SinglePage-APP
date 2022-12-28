@@ -7,6 +7,7 @@ let state = {
             { id: 1, message: "Hello , I `m here", likeCount: 15 },
             { id: 2, message: "My first post", likeCount: 10 }
         ],
+        PostNewValue:"",
         ContentBackgroundsData: [
             { id: 1, src: 'https://i0.wp.com/www.flutterbeads.com/wp-content/uploads/2021/11/set-background-image-flutter-hero.jpeg?fit=1920%2C1280&ssl=1' }
         ],
@@ -14,6 +15,7 @@ let state = {
             { id: 1, src: "https://images.ctfassets.net/419eq8k54vnb/2DGf8OF1z9mQcyDQHodxNv/6ef4083f14fd912cebac09621bdca2b4/logo.png" }
         ]
     },
+    NewMessageText:``,
     Users: [
         {
             id: 0, surname: 'Krishna', name: 'Arvind', logo: 'https://www.ibm.com/brand/experience-guides/developer/b1db1ae501d522a1a4b49613fe07c9f1/01_8-bar-positive.svg',
@@ -43,33 +45,46 @@ let state = {
 
 };
 
-let rerenderEntireTree = () => {
+let renderEntireTree = () => {
     alert(`qq`)
 };
 
 export const subscribe = (observer) => {
-    rerenderEntireTree = observer;
+    renderEntireTree = observer;
 };
 
-export const newPost = (postMessage) => {
+export const newPost = () => {
     let newPostInfo = {
         id: 3,
-        message: postMessage,
+        message: state.ProfilePage.PostNewValue,
         likeCount: 0
     };
     state.ProfilePage.PostsData.push(newPostInfo)
-    rerenderEntireTree(state);
+    renderEntireTree(state);
 };
 
-export const newMessage = (newMessage, userId) => {
+export const updatePostText = (newText)=>{
+    state.ProfilePage.PostNewValue = newText;
+    renderEntireTree(state);
+    }
+
+export const newMessage = () => {
     let newMessageInfo = {
         id: 4,
-        message: newMessage,
+        message: state.NewMessageText,
         user: true
     };
-    state.Users[userId].MessagesData.push(newMessageInfo);
-    rerenderEntireTree(state);
+    state.Users[0].MessagesData.push(newMessageInfo);
+    renderEntireTree(state);
 };
+
+export const updateMessageText = (newText) => {
+    state.NewMessageText = newText;
+    renderEntireTree(state);
+}
+
+
+
 
 export default state;
 
