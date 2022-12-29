@@ -4,7 +4,7 @@ import DialogUserMessage from './Dialog__User__Messages_Message/Dialog__User__Me
 
 const DialogUserMessages = (props) => {
 
-  let dialogs = props.Users[0].MessagesData.map((message) => {
+  let dialogs = props.users[0].messagesData.map((message) => {
     return (
       <DialogUserMessage message={message.message} id={message.id} user={message.user} />
     )
@@ -37,7 +37,7 @@ const DialogUserMessages = (props) => {
       <div className={obj.dialog__user_messages_text}>
         <textarea ref={textContentHtml} cols="50" rows="3"
           onChange={messageListener}
-          value={props.NewMessageText}
+          value={props.newMessageText}
           onFocus={clearInput}
         />
         <button onClick={addMessage} > Send</button>

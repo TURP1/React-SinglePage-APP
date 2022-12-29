@@ -13,20 +13,20 @@ function App(props) {
 
     <div className="app-wrapper">
       <Header />
-      <Navbar state={props.state.Users} />
+      <Navbar state={props.state.users} />
 
       <div className='app-wrapper__content'>
         <Routes>
         <Route path='/' element={
             <Profile
-              ProfilePage={props.state.ProfilePage}
+              profilePage={props.state.profilePage}
               newPost={props.newPost}
               updatePostText={props.updatePostText} />}
           />
           <Route path='/dialogs/*' element={
             <Dialogs
-              state={props.state.Users}
-              NewMessageText={props.state.NewMessageText}
+              state={props.state.users}
+              newMessageText={props.state.newMessageText}
               newMessage={props.newMessage}
               updateMessageText={props.updateMessageText} />}
           />

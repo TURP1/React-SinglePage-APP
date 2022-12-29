@@ -3,7 +3,7 @@ import obj from './Post.module.css'
 
 const Post = (props) => {
 
-    const PostImagesElement = props.PostImagesData.map(img => {
+    const PostImagesElement = props.postImagesData.map(img => {
         return (
             <img className={obj.post__image} src={img.src} alt="" />
         );

@@ -4,9 +4,9 @@ import Post from './Post/Post';
 
 const MyPosts = (props) => {
 
-    const PostElement = props.ProfilePage.PostsData.map((post) => {
+    const PostElement = props.profilePage.postsData.map((post) => {
         return (
-            <Post message={post.message} likeCount={post.likeCount} PostImagesData={props.ProfilePage.PostImagesData} />
+            <Post message={post.message} likeCount={post.likeCount} postImagesData={props.profilePage.postImagesData} />
         );
     });
 
@@ -34,7 +34,7 @@ const MyPosts = (props) => {
                     <h3>My posts</h3>
                 </div>
                 <div>
-                    <textarea ref={postsContentHtml} onFocus={clearInput} onChange={onChangeListener} value={props.ProfilePage.MyPosts}></textarea>
+                    <textarea ref={postsContentHtml} onFocus={clearInput} onChange={onChangeListener} value={props.profilePage.MyPosts}></textarea>
                 </div>
                 <div>
                     <button onClick={addPost}> Submit</button>

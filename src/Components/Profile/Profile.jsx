@@ -6,9 +6,9 @@ import ProfileInfo from './Profile__Info/Profile__Info';
 const Profile = (props)=>{
     return(
         <div className={obj.content}>
-       <ProfileInfo ContentBackgroundsData={props.ProfilePage.ContentBackgroundsData}/>
+       <ProfileInfo contentBackgroundsData={props.profilePage.contentBackgroundsData}/>
         <MyPosts
-         ProfilePage={props.ProfilePage}
+         profilePage={props.profilePage}
          newPost={props.newPost}
          updatePostText={props.updatePostText} />
         </div>
