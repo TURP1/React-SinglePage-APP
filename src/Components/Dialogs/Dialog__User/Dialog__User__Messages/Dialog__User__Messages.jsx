@@ -13,7 +13,7 @@ const DialogUserMessages = (props) => {
   let textContentHtml = React.createRef();
 
   let addMessage = () => {
-    props.newMessage();
+    props.action({type:"NEW-MESSAGE"})
     clearInput()
   }
 
@@ -23,7 +23,10 @@ const DialogUserMessages = (props) => {
 
   const messageListener = () => {
     let text = textContentHtml.current.value;
-    props.updateMessageText(text);
+    props.action({
+      type:"UPDATE-MESSAGE-TEXT",
+      newText: text
+    });
   }
 
 

@@ -44,7 +44,7 @@ let store = {
         ]
 
     },
-    getState(){
+    getState() {
         return this._state;
     },
     renderEntireTree() {
@@ -53,33 +53,35 @@ let store = {
     subscribe(observer) {
         this.renderEntireTree = observer;
     },
-    newPost() {
-        let newPostInfo = {
-            id: 3,
-            message: this._state.profilePage.postNewValue,
-            likeCount: 0
-        };
-        this._state.profilePage.postsData.push(newPostInfo)
-        this.renderEntireTree(this._state);
-    },
-    updatePostText(newText) {
-        this._state.profilePage.postNewValue = newText;
-        this.renderEntireTree(this._state);
-    },
-    newMessage() {
-        let newMessageInfo = {
-            id: 4,
-            message: this._state.newMessageText,
-            user: true
-        };
-        this._state.users[0].messagesData.push(newMessageInfo);
-        this.renderEntireTree(this._state);
-    },
-    updateMessageText(newText) {
-        this._state.newMessageText = newText;
-        this.renderEntireTree(this._state);
-    }
 
+    dispatchEvent(action) {
+        if (action.type === "NEW-POST") {
+            let newPostInfo = {
+                id: 3,
+                message: this._state.profilePage.postNewValue,
+                likeCount: 0
+            };
+            this._state.profilePage.postsData.push(newPostInfo)
+            this.renderEntireTree(this._state);
+        }
+        else if (action.type === "UPDATE-POST-TEXT") {
+            this._state.profilePage.postNewValue = action.newText;
+            this.renderEntireTree(this._state);
+        }
+        else if (action.type === "NEW-MESSAGE") {
+            let newMessageInfo = {
+                id: 4,
+                message: this._state.newMessageText,
+                user: true
+            };
+            this._state.users[0].messagesData.push(newMessageInfo);
+            this.renderEntireTree(this._state);
+        }
+        else if (action.type === "UPDATE-MESSAGE-TEXT") {
+            this._state.newMessageText = action.newText;
+            this.renderEntireTree(this._state);
+        }
+    }
 };
 
 window.store = store;

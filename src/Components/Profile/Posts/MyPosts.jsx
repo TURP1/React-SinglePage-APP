@@ -14,7 +14,7 @@ const MyPosts = (props) => {
     let postsContentHtml = React.createRef();
 
     let addPost = () => {
-        props.newPost();
+        props.action({ type: "NEW-POST" });
         clearInput()
     }
 
@@ -22,9 +22,12 @@ const MyPosts = (props) => {
         postsContentHtml.current.value = ``;
     }
 
-    const onChangeListener = ()=>{
+    const onChangeListener = () => {
         let text = postsContentHtml.current.value;
-        props.updatePostText(text);
+        props.action({
+            type: "UPDATE-POST-TEXT",
+            newText: text
+        })
     }
 
     return (

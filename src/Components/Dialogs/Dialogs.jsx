@@ -6,7 +6,11 @@ import DialogUser from "./Dialog__User/Dialog__User";
 
 
 const Dialogs = (props) => {
-  const DialogsElement = props.state.map(user => (< DialogUser id={user.id} userName={user.name} logo={user.logo} className={obj.dialog__user} />))
+  const DialogsElement = props.state.map(user => (< DialogUser
+    id={user.id}
+    userName={user.name}
+    logo={user.logo}
+    className={obj.dialog__user} />))
   return (
     <div className={obj.dialogs}>
       <div className={obj.dialog__users}>
@@ -14,9 +18,7 @@ const Dialogs = (props) => {
       </div>
       <DialogUserMessages
         users={props.state}
-        newMessage={props.newMessage}
-        newMessageText={props.newMessageText}
-        updateMessageText={props.updateMessageText} />
+        action={props.action} />
     </div>
 
   );
