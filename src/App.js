@@ -13,7 +13,7 @@ function App(props) {
 
     <div className="app-wrapper">
       <Header />
-      <Navbar state={props.state.users} />
+      <Navbar state={props.state.dialogsPage} />
 
       <div className='app-wrapper__content'>
         <Routes>
@@ -24,7 +24,7 @@ function App(props) {
           />
           <Route path='/dialogs/*' element={
             <Dialogs
-              state={props.state.users}
+              state={props.state.dialogsPage}
               action={props.action} />}
           />
           <Route path='/news' element={<News />} />
