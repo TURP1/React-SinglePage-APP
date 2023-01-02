@@ -1,4 +1,5 @@
 import React from 'react';
+import { NEW_MESSAGE_ACTION_CREATOR, UPDATE_MESSAGE_TEXT_ACTION_CREATOR } from '../../../../Redux/state';
 import obj from './Dialog__User__Messages.module.css'
 import DialogUserMessage from './Dialog__User__Messages_Message/Dialog__User__Messages-Message';
 
@@ -13,7 +14,7 @@ const DialogUserMessages = (props) => {
   let textContentHtml = React.createRef();
 
   let addMessage = () => {
-    props.action({type:"NEW-MESSAGE"})
+    props.action(NEW_MESSAGE_ACTION_CREATOR())
     clearInput()
   }
 
@@ -23,13 +24,8 @@ const DialogUserMessages = (props) => {
 
   const messageListener = () => {
     let text = textContentHtml.current.value;
-    props.action({
-      type:"UPDATE-MESSAGE-TEXT",
-      newText: text
-    });
+    props.action(UPDATE_MESSAGE_TEXT_ACTION_CREATOR(text));
   }
-
-
 
   return (
     <div className={obj.dialog__user__messages}>

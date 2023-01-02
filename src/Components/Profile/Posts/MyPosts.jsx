@@ -1,4 +1,5 @@
 import React from 'react';
+import { NEW_POST_ACTION_CREATOR, UPDATE_POST_TEXT_ACTION_CREATOR } from '../../../Redux/state';
 import obj from './MyPosts.module.css'
 import Post from './Post/Post';
 
@@ -13,9 +14,9 @@ const MyPosts = (props) => {
 
     let postsContentHtml = React.createRef();
 
-    let addPost = () => {
-        props.action({ type: "NEW-POST" });
-        clearInput()
+    const addPost = () => {
+        props.action(NEW_POST_ACTION_CREATOR());
+        clearInput();
     }
 
     function clearInput() {
@@ -24,11 +25,11 @@ const MyPosts = (props) => {
 
     const onChangeListener = () => {
         let text = postsContentHtml.current.value;
-        props.action({
-            type: "UPDATE-POST-TEXT",
-            newText: text
-        })
+        props.action(UPDATE_POST_TEXT_ACTION_CREATOR(text));
     }
+
+
+    
 
     return (
         <div className={obj.myPosts}>
@@ -37,7 +38,10 @@ const MyPosts = (props) => {
                     <h3>My posts</h3>
                 </div>
                 <div>
-                    <textarea ref={postsContentHtml} onFocus={clearInput} onChange={onChangeListener} value={props.profilePage.MyPosts}></textarea>
+                    <textarea ref={postsContentHtml}
+                        onFocus={clearInput}
+                        onChange={onChangeListener}
+                        value={props.profilePage.MyPosts} />
                 </div>
                 <div>
                     <button onClick={addPost}> Submit</button>
