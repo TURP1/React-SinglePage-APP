@@ -1,9 +1,7 @@
-// DATA
-const NEW_POST = "NEW-POST";
-const UPDATE_POST_TEXT = "UPDATE-POST-TEXT";
-const NEW_MESSAGE = "NEW-MESSAGE";
-const UPDATE_MESSAGE_TEXT = "UPDATE-MESSAGE-TEXT";
+import dialogsReducer from "./dialogs_reducer";
+import profileReducer from "./profile_reducer";
 
+// DATA
 let store = {
     _state: {
         profilePage: {
@@ -20,7 +18,7 @@ let store = {
             ]
         },
         dialogsPage: {
-            users : [
+            users: [
                 {
                     id: 0, surname: 'Krishna', name: 'Arvind', logo: 'https://www.ibm.com/brand/experience-guides/developer/b1db1ae501d522a1a4b49613fe07c9f1/01_8-bar-positive.svg',
                     messagesData: [
@@ -53,53 +51,18 @@ let store = {
         return this._state;
     },
     renderEntireTree() {
-        alert(`qq`)
+        alert(`plug`);
     },
     subscribe(observer) {
         this.renderEntireTree = observer;
     },
 
     dispatchEvent(action) {
-        if (action.type === NEW_POST) {
-            let newPostInfo = {
-                id: 3,
-                message: this._state.profilePage.postNewValue,
-                likeCount: 0
-            };
-            this._state.profilePage.postsData.push(newPostInfo)
-            this.renderEntireTree(this._state);
-        }
-        else if (action.type === UPDATE_POST_TEXT) {
-            this._state.profilePage.postNewValue = action.newText;
-            this.renderEntireTree(this._state);
-        }
-        else if (action.type === NEW_MESSAGE) {
-            let newMessageInfo = {
-                id: 4,
-                message: this._state.dialogsPage.newMessageText,
-                user: true
-            };
-            this._state.dialogsPage.users[0].messagesData.push(newMessageInfo);
-            this.renderEntireTree(this._state);
-        }
-        else if (action.type === UPDATE_MESSAGE_TEXT) {
-            this._state.dialogsPage.newMessageText = action.newText;
-            this.renderEntireTree(this._state);
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+        this.renderEntireTree(this._state);  
     }
 };
-
-export const NEW_POST_ACTION_CREATOR = () => ({ type: NEW_POST });
-
-export const UPDATE_POST_TEXT_ACTION_CREATOR = (text) => (
-    { type: UPDATE_POST_TEXT, newText: text });
-
-export const NEW_MESSAGE_ACTION_CREATOR = () => ({ type: NEW_MESSAGE });
-
-export const UPDATE_MESSAGE_TEXT_ACTION_CREATOR = (text) => ({
-    type: UPDATE_MESSAGE_TEXT , newText: text
-});
-
 
 window.store = store;
 

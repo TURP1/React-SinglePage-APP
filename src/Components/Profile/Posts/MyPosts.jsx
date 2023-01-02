@@ -1,5 +1,5 @@
 import React from 'react';
-import { NEW_POST_ACTION_CREATOR, UPDATE_POST_TEXT_ACTION_CREATOR } from '../../../Redux/state';
+import { NEW_POST_ACTION_CREATOR, UPDATE_POST_TEXT_ACTION_CREATOR } from '../../../Redux/profile_reducer';
 import obj from './MyPosts.module.css'
 import Post from './Post/Post';
 
@@ -28,9 +28,6 @@ const MyPosts = (props) => {
         props.action(UPDATE_POST_TEXT_ACTION_CREATOR(text));
     }
 
-
-    
-
     return (
         <div className={obj.myPosts}>
             <div>
@@ -46,9 +43,8 @@ const MyPosts = (props) => {
                 <div>
                     <button onClick={addPost}> Submit</button>
                 </div>
-
-
             </div>
+            
             <div>
                 <div className={obj.myPostsBlock}>
                     <h4>my News</h4>
