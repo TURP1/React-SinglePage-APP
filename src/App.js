@@ -9,6 +9,7 @@ import Profile from './Components/Profile/Profile';
 import Settings from './Components/Settings/Settings';
 
 function App(props) {
+
   return (
 
     <div className="app-wrapper">
@@ -20,12 +21,12 @@ function App(props) {
           <Route path='/' element={
             <Profile
               profilePage={props.state.profilePage}
-              action={props.action} />}
+              action={props.dispatch} />}
           />
           <Route path='/dialogs/*' element={
             <Dialogs
               state={props.state.dialogsPage}
-              action={props.action} />}
+              action={props.dispatch} />}
           />
           <Route path='/news' element={<News />} />
           <Route path='/music' element={<Music />} />

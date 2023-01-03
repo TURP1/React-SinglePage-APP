@@ -6,7 +6,6 @@ import DialogUser from "./Dialog__User/Dialog__User";
 
 
 const Dialogs = (props) => {
-
   const DialogsElement = props.state.users.map(user => (< DialogUser
     id={user.id}
     userName={user.name}

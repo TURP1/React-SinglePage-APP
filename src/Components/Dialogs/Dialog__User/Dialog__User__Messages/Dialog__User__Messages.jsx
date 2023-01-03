@@ -14,6 +14,7 @@ const DialogUserMessages = (props) => {
   let textContentHtml = React.createRef();
 
   let addMessage = () => {
+    debugger;
     props.action(NEW_MESSAGE_ACTION_CREATOR())
     clearInput()
   }

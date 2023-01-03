@@ -1,4 +1,4 @@
-import store from './Redux/state';
+import store from './Redux/redux_store';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
@@ -11,11 +11,13 @@ let renderEntireTree = () => {
         <React.StrictMode>
             <BrowserRouter>
                 <App state={store.getState()}
-                    action={store.dispatchEvent.bind(store)} />
+                    dispatch={store.dispatch.bind(store)} />
             </BrowserRouter>
         </React.StrictMode>
     );
 };
 
-renderEntireTree(store.getState());
-store.subscribe(renderEntireTree);
+renderEntireTree();
+store.subscribe( ()=>{
+    renderEntireTree(store.getState());
+});
