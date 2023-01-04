@@ -10,23 +10,25 @@ import Settings from './Components/Settings/Settings';
 
 function App(props) {
 
-  return (
+  let state = props.store.getState();
 
+  return (
     <div className="app-wrapper">
       <Header />
-      <Navbar state={props.state.dialogsPage} />
+      <Navbar state={state.dialogsPage} />
 
       <div className='app-wrapper__content'>
         <Routes>
           <Route path='/' element={
             <Profile
-              profilePage={props.state.profilePage}
-              action={props.dispatch} />}
+              store={props.store}
+              state={state} />}
           />
           <Route path='/dialogs/*' element={
             <Dialogs
-              state={props.state.dialogsPage}
-              action={props.dispatch} />}
+              store={props.store}
+              state={state}
+            />}
           />
           <Route path='/news' element={<News />} />
           <Route path='/music' element={<Music />} />

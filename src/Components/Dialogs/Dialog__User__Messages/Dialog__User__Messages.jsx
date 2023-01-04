@@ -1,5 +1,4 @@
 import React from 'react';
-import { NEW_MESSAGE_ACTION_CREATOR, UPDATE_MESSAGE_TEXT_ACTION_CREATOR } from '../../../../Redux/dialogs_reducer';
 import obj from './Dialog__User__Messages.module.css'
 import DialogUserMessage from './Dialog__User__Messages_Message/Dialog__User__Messages-Message';
 
@@ -13,20 +12,19 @@ const DialogUserMessages = (props) => {
 
   let textContentHtml = React.createRef();
 
-  let addMessage = () => {
-    debugger;
-    props.action(NEW_MESSAGE_ACTION_CREATOR())
-    clearInput()
-  }
+  let onMessageAdd = () => {
+    props.newMessage();
+    clearInput();
+  };
 
   function clearInput() {
     textContentHtml.current.value = ``;
-  }
+  };
 
-  const messageListener = () => {
+  const onMessageChange = () => {
     let text = textContentHtml.current.value;
-    props.action(UPDATE_MESSAGE_TEXT_ACTION_CREATOR(text));
-  }
+    props.updateMessageText(text);
+  };
 
   return (
     <div className={obj.dialog__user__messages}>
@@ -36,11 +34,11 @@ const DialogUserMessages = (props) => {
 
       <div className={obj.dialog__user_messages_text}>
         <textarea ref={textContentHtml} cols="50" rows="3"
-          onChange={messageListener}
+          onChange={onMessageChange}
           value={props.newMessageText}
           onFocus={clearInput}
         />
-        <button onClick={addMessage} > Send</button>
+        <button onClick={onMessageAdd} > Send</button>
       </div>
     </div>
   )

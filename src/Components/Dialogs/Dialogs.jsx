@@ -1,12 +1,13 @@
 import React from 'react'
 import obj from './Dialogs.module.css'
-import DialogUserMessages from './Dialog__User/Dialog__User__Messages/Dialog__User__Messages';
 import DialogUser from "./Dialog__User/Dialog__User";
+import DialogUserMessagesContainer from './Dialog__User__Messages/Dialog__User__Messages_Container';
 
 
 
 const Dialogs = (props) => {
-  const DialogsElement = props.state.users.map(user => (< DialogUser
+
+  const DialogsElement = props.state.dialogsPage.users.map(user => (< DialogUser
     id={user.id}
     userName={user.name}
     logo={user.logo}
@@ -16,9 +17,9 @@ const Dialogs = (props) => {
       <div className={obj.dialog__users}>
         {DialogsElement}
       </div>
-      <DialogUserMessages
-        users={props.state.users}
-        action={props.action} />
+      <DialogUserMessagesContainer
+        state={props.state}
+        store={props.store} />
     </div>
 
   );
