@@ -5,11 +5,10 @@ import NavbarFriends from './Navbar__Friends/Navbar__Friends';
 
 const Navbar = (props) => {
 
-  let NavFriends = props.state.users.map((friend) => {
+  let NavFriends = props.users.map((friend) => {
     return (
       <NavbarFriends logo={friend.logo} surname={friend.surname} name={friend.name} />
     )
-
   })
   return (
     <nav className={obj.nav}>

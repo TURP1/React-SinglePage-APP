@@ -3,19 +3,17 @@ import './App.css';
 import DialogsContainer from './Components/Dialogs/Dialogs_Container';
 import Header from './Components/Header/Header';
 import Music from './Components/Music/Music';
-import Navbar from './Components/Navbar/Navbar';
+import NavbarContainer from './Components/Navbar/Navbar_Container';
 import News from './Components/News/News';
 import ProfileContainer from './Components/Profile/Profile_Container';
 import Settings from './Components/Settings/Settings';
 
 function App(props) {
 
-  let state = props.store.getState();
-
   return (
     <div className="app-wrapper">
       <Header />
-      <Navbar state={state.dialogsPage} />
+      <NavbarContainer store={props.store} />
 
       <div className='app-wrapper__content'>
         <Routes>
