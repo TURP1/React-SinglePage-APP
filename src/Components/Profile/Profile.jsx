@@ -8,9 +8,11 @@ const Profile = (props) => {
     return (
         <div className={obj.content}>
             <ProfileInfo contentBackgroundsData={props.profileInfoContentBackgroundsData} />
-            <MyPosts
-                myPostsPageMethods={props.myPostsPageMethods}
-                myPostsPageData={props.myPostsPageData} />
+            <MyPosts postsData={props.postsData}
+                updatePostText={props.updatePostText}
+                newPost={props.newPost}
+                newValue={props.newValue}
+                postImageData={props.postImageData} />
         </div>
     );
 };

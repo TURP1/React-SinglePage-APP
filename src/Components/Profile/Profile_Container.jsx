@@ -1,35 +1,30 @@
 import React from 'react'
+import { connect } from 'react-redux';
 import { NEW_POST_ACTION_CREATOR, UPDATE_POST_TEXT_ACTION_CREATOR } from '../../Redux/profile_reducer';
 import Profile from './Profile';
 
-const ProfileContainer = (props) => {
+let mapStateToProps = (state) => {
 
-    let profilePage = props.store.getState().profilePage;
+    return {
+        postsData: state.profilePage.postsData,
+        newValue: state.profilePage.postNewValue,
+        postImageData: state.profilePage.postImagesData,
+        profileInfoContentBackgroundsData: state.profilePage.contentBackgroundsData
+    }
 
-    const newPost = () => {
-        props.store.dispatch(NEW_POST_ACTION_CREATOR());
-    };
-
-    const updatePostText = (text) => {
-        props.store.dispatch(UPDATE_POST_TEXT_ACTION_CREATOR(text));
-    };
-
-    let profilePageMethods = {
-        updatePostText,
-        newPost,
-    };
-
-    const profilePageData = {
-        postsData: profilePage.postsData,
-        newValue: profilePage.newValue,
-        postImageData: profilePage.postImagesData
-    };
-
-
-    return (
-        <Profile myPostsPageData={profilePageData}
-            myPostsPageMethods={profilePageMethods}
-            profileInfoContentBackgroundsData={profilePage.contentBackgroundsData} />
-    );
 };
+
+let mapDispatchToProps = (dispatch) => {
+    return {
+        updatePostText: (text) => {
+            dispatch(UPDATE_POST_TEXT_ACTION_CREATOR(text));
+        },
+        newPost: () => {
+            dispatch(NEW_POST_ACTION_CREATOR());
+        }
+    }
+}
+
+const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(Profile)
+
 export default ProfileContainer;

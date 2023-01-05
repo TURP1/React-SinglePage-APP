@@ -31,7 +31,6 @@ function App(props) {
           <Route path='/music' element={<Music />} />
           <Route path='/settings' element={<Settings />} />
         </Routes>
-
       </div>
     </div>
 

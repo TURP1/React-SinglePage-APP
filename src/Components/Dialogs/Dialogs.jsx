@@ -8,7 +8,7 @@ import DialogUserMessages from './Dialog__User__Messages/Dialog__User__Messages'
 
 const Dialogs = (props) => {
 
-  const DialogsElement = props.dialogsPageData.dialogsPage.users.map(user => (< DialogUser
+  const DialogsElement = props.dialogsPageData.users.map(user => (< DialogUser
     id={user.id}
     userName={user.name}
     logo={user.logo}
@@ -20,7 +20,8 @@ const Dialogs = (props) => {
         {DialogsElement}
       </div>
       <DialogUserMessages dialogsPageData={props.dialogsPageData}
-    dialogsPageMethods={props.dialogsPageMethods}/>
+        newMessage={props.newMessage}
+        updateMessageText={props.updateMessageText} />
     </div>
 
   );
