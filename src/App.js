@@ -1,11 +1,11 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import Dialogs from './Components/Dialogs/Dialogs';
+import DialogsContainer from './Components/Dialogs/Dialogs_Container';
 import Header from './Components/Header/Header';
 import Music from './Components/Music/Music';
 import Navbar from './Components/Navbar/Navbar';
 import News from './Components/News/News';
-import Profile from './Components/Profile/Profile';
+import ProfileContainer from './Components/Profile/Profile_Container';
 import Settings from './Components/Settings/Settings';
 
 function App(props) {
@@ -20,14 +20,13 @@ function App(props) {
       <div className='app-wrapper__content'>
         <Routes>
           <Route path='/' element={
-            <Profile
+            <ProfileContainer
               store={props.store}
-              state={state} />}
+            />}
           />
           <Route path='/dialogs/*' element={
-            <Dialogs
+            <DialogsContainer
               store={props.store}
-              state={state}
             />}
           />
           <Route path='/news' element={<News />} />

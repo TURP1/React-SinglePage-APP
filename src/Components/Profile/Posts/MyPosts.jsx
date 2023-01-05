@@ -4,9 +4,9 @@ import Post from './Post/Post';
 
 const MyPosts = (props) => {
 
-    const PostElement = props.postsData.map((post) => {
+    const PostElement = props.myPostsPageData.postsData.map((post) => {
         return (
-            <Post message={post.message} likeCount={post.likeCount} postImagesData={props.postImageData} />
+            <Post message={post.message} likeCount={post.likeCount} postImagesData={props.myPostsPageData.postImageData} />
         );
     });
 
@@ -14,12 +14,12 @@ const MyPosts = (props) => {
     let postsContentHtml = React.createRef();
 
     const onAddPost = () => {
-        props.newPost();
+        props.myPostsPageMethods.newPost();
         clearInput();
     };
     const onChangeListener = () => {
         let text = postsContentHtml.current.value;
-        props.updatePostText(text);
+        props.myPostsPageMethods.updatePostText(text);
     };
 
     function clearInput() {
@@ -36,7 +36,7 @@ const MyPosts = (props) => {
                     <textarea ref={postsContentHtml}
                         onFocus={clearInput}
                         onChange={onChangeListener}
-                        value={props.newValue} />
+                        value={props.myPostsPageData.newValue} />
                 </div>
                 <div>
                     <button onClick={onAddPost}> Submit</button>
