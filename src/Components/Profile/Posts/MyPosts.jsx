@@ -3,7 +3,7 @@ import obj from './MyPosts.module.css'
 import Post from './Post/Post';
 
 const MyPosts = (props) => {
-debugger
+
     const PostElement = props.postsData.map((post) => {
         return (
             <Post message={post.message} likeCount={post.likeCount} postImagesData={props.postImageData} />
