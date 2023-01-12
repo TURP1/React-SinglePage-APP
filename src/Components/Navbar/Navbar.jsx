@@ -7,7 +7,7 @@ const Navbar = (props) => {
 
   let NavFriends = props.users.map((friend) => {
     return (
-      <NavbarFriends logo={friend.logo} surname={friend.surname} name={friend.name} />
+      <NavbarFriends key={friend.id} logo={friend.logo} surname={friend.surname} name={friend.name} />
     )
   })
   return (
@@ -35,6 +35,11 @@ const Navbar = (props) => {
       <div className={obj.item}>
         <NavLink to='/settings' className={navData => navData.isActive ? obj.active : obj.item}>
           Settings
+        </NavLink>
+      </div>
+      <div className={obj.item}>
+        <NavLink to='/findUsers' className={navData => navData.isActive ? obj.active : obj.item}>
+          Find Users
         </NavLink>
       </div>
       <div className={obj.friends__block}>

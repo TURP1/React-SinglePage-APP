@@ -4,7 +4,6 @@ import obj from './Profile.module.css'
 import ProfileInfo from './Profile__Info/Profile__Info';
 
 const Profile = (props) => {
-
     return (
         <div className={obj.content}>
             <ProfileInfo contentBackgroundsData={props.profileInfoContentBackgroundsData} />

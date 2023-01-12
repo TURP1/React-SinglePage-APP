@@ -23,7 +23,7 @@ const MyPosts = (props) => {
 
     function clearInput() {
         postsContentHtml.current.value = ``;
-    }
+    };
 
     return (
         <div className={obj.myPosts}>

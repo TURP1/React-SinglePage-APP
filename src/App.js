@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import DialogsContainer from './Components/Dialogs/Dialogs_Container';
+import Find_Users_Container from './Components/Find_Users/Find_Users_Container';
 import Header from './Components/Header/Header';
 import Music from './Components/Music/Music';
 import NavbarContainer from './Components/Navbar/Navbar_Container';
@@ -30,6 +31,9 @@ function App(props) {
           <Route path='/news' element={<News />} />
           <Route path='/music' element={<Music />} />
           <Route path='/settings' element={<Settings />} />
+          <Route path='/findUsers' element={<Find_Users_Container 
+          store={props.store}/>}
+           />
         </Routes>
       </div>
     </div>

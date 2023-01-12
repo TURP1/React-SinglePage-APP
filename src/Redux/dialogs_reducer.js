@@ -42,19 +42,19 @@ const dialogsReducer = (state = initialState, action) => {
                 message: state.newMessageText,
                 user: true
             };
-            let newState = { ...state };
-            newState.users = [...state.users];
+
+            let newState = { ...state, 
+            users: [...state.users] };
             for (const i of newState.users) {
-                newState.users[i] = {...state.users[i]};
+                newState.users[i] = { ...state.users[i] };
             }
             newState.users[0].messagesData = [...state.users[0].messagesData];
             newState.users[0].messagesData.push(newMessageInfo);
             return newState;
         }
         case UPDATE_MESSAGE_TEXT: {
-            let newState = { ...state };
-            newState.newMessageText = action.newText;
-            return newState;
+            return { ...state,
+                 newMessageText: action.newText  };
         }
         default:
             return state;
