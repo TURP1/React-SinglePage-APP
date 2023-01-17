@@ -28,7 +28,7 @@
     flex-direction: row;
     border: 5px solid black;
     border-radius: 10px;
-    width: 40%;
+    width: 80%;
     justify-content: space-between;
     font-size: 25px;
     padding: 20px;
@@ -47,6 +47,7 @@
 }
 .findUsers_info_location{
     font-weight: bolder;
+    min-width: 0;
     
 }
 .findUsers_info_location :first-child{

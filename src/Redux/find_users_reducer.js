@@ -4,7 +4,6 @@ const SET_USER = "SET_USER";
 
 let initialState = {
     users: [
-
     ]
 }
 
