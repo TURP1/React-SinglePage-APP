@@ -4,16 +4,18 @@ import obj from './Find_Users.module.css';
 import defaultPhoto from '../../assets/images/default_photo.jpg'
 
 const Find_Users = (props) => {
-    if (props.users.length === 0) {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users`)
-            .then(response => {
-                props.setUsers(response.data.items);
-            })
+    let findUsers = () => {
+        if (props.users.length === 0) {
+            axios.get(`https://social-network.samuraijs.com/api/1.0/users`)
+                .then(response => {
+                    props.setUsers(response.data.items);
+                })
+        }
     }
+    
 
     let usersStore = props.users;
     let mapUser = usersStore.map((u) => {
-        debugger
         return (
             <div className={obj.findUsers_block} key={u.id}>
                 <div className={obj.findUsers_ava_follow}>
@@ -45,12 +47,11 @@ const Find_Users = (props) => {
     })
 
     return (
-
+       
         <div className={obj.findUsers_container}>
+             <button onClick={findUsers}>Find Users</button>
             {mapUser}
         </div>
-
-
     )
 }
 

@@ -1,7 +1,7 @@
 
 import { connect } from "react-redux";
 import { SET_USER_AC, USER_FOLLOW_AC, USER_UNFOLLOW_AC } from "../../Redux/find_users_reducer";
-import Find_Users from "./Find_Users";
+import Find_UsersC from "./Find_UsersС";
 
 
 let mapPropsToState = (state) => {
@@ -21,7 +21,7 @@ let mapDispatchToState = (dispatch) => {
 
 
 
-const Find_Users_Container = connect(mapPropsToState, mapDispatchToState)(Find_Users)
+const Find_Users_Container = connect(mapPropsToState, mapDispatchToState)(Find_UsersC)
 
 
 
