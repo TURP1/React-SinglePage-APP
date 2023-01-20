@@ -6,7 +6,16 @@ import defaultPhoto from '../../assets/images/default_photo.jpg'
 class User extends React.Component {
 
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.userPage}&count=${this.props.usersInOnePage}`)
+            .then(response => {
+                this.props.setUsers(response.data.items);
+                this.props.setTotalCount(response.data.totalCount);
+            })
+    }
+
+    onPageChanged = (changedPage) => {
+        this.props.setUserPage(changedPage);
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.userPage}&count=${this.props.usersInOnePage}`)
             .then(response => {
                 this.props.setUsers(response.data.items);
             })
@@ -14,10 +23,13 @@ class User extends React.Component {
 
 
 
+
     render() {
+
         let usersStore = this.props.users;
         let mapUser = usersStore.map((u) => {
             return (
+
                 <div className={obj.findUsers_block} key={u.id}>
                     <div className={obj.findUsers_ava_follow}>
                         <div>
@@ -47,9 +59,24 @@ class User extends React.Component {
             )
         })
 
+        let pagesCount = Math.ceil(this.props.usersTotalCount / this.props.usersInOnePage)
+        let pages = [];
+        for (let i = 1; i <= pagesCount; i++) {
+            pages.push(i)
+        }
+
         return (
 
             <div className={obj.findUsers_container}>
+                <div className={obj.findUsers_pageNumber}>
+
+                    {pages.map((page) => {
+                        return <span
+                            onClick={(e) => { this.onPageChanged(page) }}
+                            className={page === this.props.userPage && obj.checkedPage}>{page}</span>
+                    })}
+
+                </div>
                 {mapUser}
             </div>
         )
