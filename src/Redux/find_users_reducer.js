@@ -61,17 +61,17 @@ const findUserReducer = (state = initialState, action) => {
     }
 };
 
-export const USER_FOLLOW_AC = (userID) => ({ type: USER_FOLLOW, id: userID });
+export const userFollow = (userID) => ({ type: USER_FOLLOW, id: userID });
 
-export const USER_UNFOLLOW_AC = (userID) => ({ type: USER_UNFOLLOW, id: userID });
+export const userUnFollow = (userID) => ({ type: USER_UNFOLLOW, id: userID });
 
-export const SET_USER_AC = (users) => ({ type: SET_USER, users });
+export const setUsers = (users) => ({ type: SET_USER, users });
 
-export const SET_USER_PAGE_AC = (userPage) => ({ type: SET_USER_PAGE, userPage });
+export const setUserPage = (userPage) => ({ type: SET_USER_PAGE, userPage });
 
-export const SET_TOTAL_COUNT_AC = (usersTotalCount) => ({ type: SET_TOTAL_COUNT, usersTotalCount });
+export const setTotalCount = (usersTotalCount) => ({ type: SET_TOTAL_COUNT, usersTotalCount });
 
-export const SET_FETCHING_AC = (isFetched) => ({ type: SET_FETCHING, isFetched })
+export const setFetch = (isFetched) => ({ type: SET_FETCHING, isFetched })
 
 
 
