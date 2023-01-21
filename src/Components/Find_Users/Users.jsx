@@ -1,32 +1,10 @@
-import axios from "axios";
 import React from "react";
+import defaultPhoto from '../../assets/images/default_photo.jpg';
 import obj from './Find_Users.module.css';
-import defaultPhoto from '../../assets/images/default_photo.jpg'
-
-class User extends React.Component {
-
-    componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.userPage}&count=${this.props.usersInOnePage}`)
-            .then(response => {
-                this.props.setUsers(response.data.items);
-                this.props.setTotalCount(response.data.totalCount);
-            })
-    }
-
-    onPageChanged = (changedPage) => {
-        this.props.setUserPage(changedPage);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.userPage}&count=${this.props.usersInOnePage}`)
-            .then(response => {
-                this.props.setUsers(response.data.items);
-            })
-    }
 
 
-
-
-    render() {
-
-        let usersStore = this.props.users;
+const Users = (props) => {
+        let usersStore = props.users;
         let mapUser = usersStore.map((u) => {
             return (
 
@@ -37,8 +15,8 @@ class User extends React.Component {
                                 src={u.photos.small !== null ? u.photos.small : defaultPhoto} alt="" /></div>
                         <div className={obj.findUsers_followed_btn}>
                             {u.followed
-                                ? <button onClick={() => { this.props.userUnFollow(u.id) }}>Unfollow</button>
-                                : <button onClick={() => { this.props.userFollow(u.id) }} >Follow</button>} </div>
+                                ? <button onClick={() => { props.userUnFollow(u.id) }}>Unfollow</button>
+                                : <button onClick={() => { props.userFollow(u.id) }} >Follow</button>} </div>
                     </div>
                     <div className={obj.findUsers_info_container}>
                         <div className={obj.findUsers_info_fullname_status}>
@@ -59,7 +37,7 @@ class User extends React.Component {
             )
         })
 
-        let pagesCount = Math.ceil(this.props.usersTotalCount / this.props.usersInOnePage)
+        let pagesCount = Math.ceil(props.usersTotalCount / props.usersInOnePage)
         let pages = [];
         for (let i = 1; i <= pagesCount; i++) {
             pages.push(i)
@@ -72,16 +50,13 @@ class User extends React.Component {
 
                     {pages.map((page) => {
                         return <span
-                            onClick={(e) => { this.onPageChanged(page) }}
-                            className={page === this.props.userPage && obj.checkedPage}>{page}</span>
+                            onClick={(e) => { props.onPageChanged(page) }}
+                            className={page === props.userPage? obj.checkedPage: undefined}>{page}</span>
                     })}
 
                 </div>
                 {mapUser}
             </div>
         )
-    }
-}
-
-
-export default User
+                } 
+export default Users
