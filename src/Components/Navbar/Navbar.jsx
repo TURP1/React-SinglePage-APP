@@ -43,7 +43,7 @@ const Navbar = (props) => {
         </NavLink>
       </div>
       <div className={obj.friends__block}>
-        <h3>Friends</h3>
+        <h2>Friends</h2>
         <div className={obj.friends}>
           {NavFriends}
         </div>

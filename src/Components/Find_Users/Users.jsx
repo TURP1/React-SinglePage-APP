@@ -47,7 +47,6 @@ const Users = (props) => {
 
             <div className={obj.findUsers_container}>
                 <div className={obj.findUsers_pageNumber}>
-
                     {pages.map((page) => {
                         return <span
                             onClick={(e) => { props.onPageChanged(page) }}

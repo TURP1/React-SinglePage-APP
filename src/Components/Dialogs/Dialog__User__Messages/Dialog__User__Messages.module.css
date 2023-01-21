@@ -26,3 +26,17 @@
     margin-left: 40px;
 
 }
+.dialog__user_messages_btn{
+    background: #fff;
+    border: 2px solid black;
+    border-radius: 3px;
+}
+.dialog__user_messages_textarea{
+    border: 2px solid black;
+    
+}
+.dialog__user_messages_textarea:focus {
+    outline: none !important;
+    border: 2px solid black;
+    box-shadow: 0 0 10px #719ECE;
+  }

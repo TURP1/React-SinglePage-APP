@@ -1,0 +1,7 @@
+.preloader{
+    text-align: center;
+    padding: 20vh;
+}
+.preloader img {
+    width: 300px;
+}

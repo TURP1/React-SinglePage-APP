@@ -33,12 +33,12 @@ const DialogUserMessages = (props) => {
       </div>
 
       <div className={obj.dialog__user_messages_text}>
-        <textarea ref={textContentHtml} cols="50" rows="3"
+        <textarea className={obj.dialog__user_messages_textarea} ref={textContentHtml} cols="50" rows="3"
           onChange={onMessageChange}
           value={props.dialogsPageData.newMessageText}
           onFocus={clearInput}
         />
-        <button onClick={onMessageAdd} > Send</button>
+        <button className={obj.dialog__user_messages_btn} onClick={onMessageAdd} > Send</button>
       </div>
     </div>
   )
