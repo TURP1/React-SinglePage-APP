@@ -23,28 +23,28 @@ const MyPosts = (props) => {
 
     function clearInput() {
         postsContentHtml.current.value = ``;
-    };
+    }
 
     return (
         <div className={obj.myPosts}>
             <div>
                 <div>
-                    <h3>My posts</h3>
+                    <h2>My posts</h2>
                 </div>
                 <div>
-                    <textarea ref={postsContentHtml}
+                    <textarea cols="50" rows="3" className={obj.myPosts_textarea} ref={postsContentHtml}
                         onFocus={clearInput}
                         onChange={onChangeListener}
                         value={props.newValue} />
                 </div>
                 <div>
-                    <button onClick={onAddPost}> Submit</button>
+                    <button className={obj.myPosts__addPost_btn} onClick={onAddPost}> Submit</button>
                 </div>
             </div>
 
             <div>
                 <div className={obj.myPostsBlock}>
-                    <h4>my News</h4>
+                    <h3>my News</h3>
                     <div className={obj.newPost}>new post</div>
                     {PostElement}
                 </div>

@@ -3,7 +3,8 @@ const USER_UNFOLLOW = "USER_UNFOLLOW";
 const SET_USER = "SET_USER";
 const SET_USER_PAGE = "SET_USER_PAGE";
 const SET_TOTAL_COUNT = "SET_TOTAL_COUNT";
-const SET_FETCHING = "SET_FETCHING"
+const SET_FETCHING = "SET_FETCHING";
+const SET_CURRENT_PROFILE = "SET_CURRENT_PROFILE";
 
 let initialState = {
     users: [
@@ -11,9 +12,8 @@ let initialState = {
     userPageNumber: 1,
     usersInOnePage: 100,
     usersTotalCount: 10,
-    isFetched: true
-
-
+    isFetched: true,
+    currentProfile: 2
 }
 
 const findUserReducer = (state = initialState, action) => {
@@ -55,6 +55,10 @@ const findUserReducer = (state = initialState, action) => {
             return {
                 ...state, isFetched: action.isFetched
             }
+        case SET_CURRENT_PROFILE:
+            return {
+                ...state, currentProfile: action.currentProfile
+            }
 
         default:
             return state;
@@ -71,7 +75,9 @@ export const setUserPage = (userPage) => ({ type: SET_USER_PAGE, userPage });
 
 export const setTotalCount = (usersTotalCount) => ({ type: SET_TOTAL_COUNT, usersTotalCount });
 
-export const setFetch = (isFetched) => ({ type: SET_FETCHING, isFetched })
+export const setFetch = (isFetched) => ({ type: SET_FETCHING, isFetched });
+
+export const setCurrentProfile = (currentProfile) => ({ type: SET_CURRENT_PROFILE, currentProfile });
 
 
 

@@ -13,7 +13,7 @@ const Navbar = (props) => {
   return (
     <nav className={obj.nav}>
       <div className={obj.item}>
-        <NavLink to='/' className={navData => navData.isActive ? obj.active : obj.item}>
+        <NavLink to='/profile' className={navData => navData.isActive ? obj.active : obj.item}>
           Profile
         </NavLink>
       </div>

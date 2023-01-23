@@ -1,7 +1,28 @@
+import axios from 'axios';
 import React from 'react'
 import { connect } from 'react-redux';
-import { NEW_POST_ACTION_CREATOR, UPDATE_POST_TEXT_ACTION_CREATOR } from '../../Redux/profile_reducer';
+import { updatePostText, newPost, setCurrentProfileInfo } from '../../Redux/profile_reducer';
 import Profile from './Profile';
+
+class ProfileContainerClass extends React.Component {
+    componentDidMount() {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${this.props.currentProfile}`)
+            .then(response => {
+                this.props.setCurrentProfileInfo(response.data);
+            })
+    }
+    render() {
+        return <Profile
+            postsData={this.props.postsData}
+            newValue={this.props.newValue}
+            postImageData={this.props.postImageData}
+            currentProfileInfo={this.props.currentProfileInfo}
+            updatePostText={this.props.updatePostText}
+            newPost={this.props.newPost}
+        />
+    }
+
+}
 
 let mapStateToProps = (state) => {
 
@@ -9,22 +30,11 @@ let mapStateToProps = (state) => {
         postsData: state.profilePage.postsData,
         newValue: state.profilePage.postNewValue,
         postImageData: state.profilePage.postImagesData,
-        profileInfoContentBackgroundsData: state.profilePage.contentBackgroundsData
+        currentProfileInfo: state.profilePage.currentProfileInfo,
+        currentProfile: state.findUsersPage.currentProfile
     }
 
 };
-
-let mapDispatchToProps = (dispatch) => {
-    return {
-        updatePostText: (text) => {
-            dispatch(UPDATE_POST_TEXT_ACTION_CREATOR(text));
-        },
-        newPost: () => {
-            dispatch(NEW_POST_ACTION_CREATOR());
-        }
-    }
-}
-
-const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(Profile)
+const ProfileContainer = connect(mapStateToProps, { updatePostText, newPost, setCurrentProfileInfo })(ProfileContainerClass)
 
 export default ProfileContainer;

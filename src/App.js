@@ -18,7 +18,7 @@ function App(props) {
 
       <div className='app-wrapper__content'>
         <Routes>
-          <Route path='/' element={
+          <Route path='/profile/*' element={
             <ProfileContainer
               store={props.store}
             />}
