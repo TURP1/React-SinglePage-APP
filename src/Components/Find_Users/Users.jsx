@@ -11,7 +11,7 @@ const Users = (props) => {
             <div className={obj.findUsers_block} key={u.id}>
                 <div className={obj.findUsers_ava_follow}>
                     <NavLink to={`/profile/${u.id}`} >
-                        <img onClick={()=>{props.setCurrentProfile(u.id)}} className={obj.findUsers_ava}
+                        <img className={obj.findUsers_ava}
                             src={u.photos.small !== null ? u.photos.small : defaultPhoto} alt="" />
                     </NavLink>
                     <div className={obj.findUsers_followed_btn}>

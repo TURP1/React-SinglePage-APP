@@ -1,6 +1,6 @@
 
 import { connect } from "react-redux";
-import { userFollow, userUnFollow, setUsers, setUserPage, setTotalCount, setFetch, setCurrentProfile } from "../../Redux/find_users_reducer";
+import { userFollow, userUnFollow, setUsers, setUserPage, setTotalCount, setFetch} from "../../Redux/find_users_reducer";
 import axios from "axios";
 import React from "react";
 import Users from "./Users";
@@ -43,7 +43,7 @@ class UsersContainer extends React.Component {
                     usersInOnePage={this.props.usersInOnePage}
                     userPage={this.props.userPage}
                     onPageChanged={this.onPageChanged}
-                    setCurrentProfile={this.props.setCurrentProfile} />}
+                    />}
         </>
 
 
@@ -81,7 +81,6 @@ const Find_Users_Container = connect(mapPropsToState, {
     setUserPage,
     setTotalCount,
     setFetch,
-    setCurrentProfile
 })(UsersContainer)
 
 

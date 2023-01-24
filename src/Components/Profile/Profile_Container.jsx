@@ -1,12 +1,14 @@
 import axios from 'axios';
 import React from 'react'
 import { connect } from 'react-redux';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { updatePostText, newPost, setCurrentProfileInfo } from '../../Redux/profile_reducer';
 import Profile from './Profile';
 
-class ProfileContainerClass extends React.Component {
+class ProfileContainer extends React.Component {
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${this.props.currentProfile}`)
+        debugger
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${this.props.router.params.UserId}`)
             .then(response => {
                 this.props.setCurrentProfileInfo(response.data);
             })
@@ -30,11 +32,26 @@ let mapStateToProps = (state) => {
         postsData: state.profilePage.postsData,
         newValue: state.profilePage.postNewValue,
         postImageData: state.profilePage.postImagesData,
-        currentProfileInfo: state.profilePage.currentProfileInfo,
-        currentProfile: state.findUsersPage.currentProfile
+        currentProfileInfo: state.profilePage.currentProfileInfo
     }
 
 };
-const ProfileContainer = connect(mapStateToProps, { updatePostText, newPost, setCurrentProfileInfo })(ProfileContainerClass)
 
-export default ProfileContainer;
+function withRouter(Component) {
+    function ComponentWithRouterProp(props) {
+        let location = useLocation();
+        let navigate = useNavigate();
+        let params = useParams();
+        return (
+            <Component
+                {...props}
+                router={{ location, navigate, params }}
+            />
+        );
+    }
+    return ComponentWithRouterProp;
+}
+
+let ProfileContainerWithUrl =  withRouter(ProfileContainer)
+
+export default connect(mapStateToProps, { updatePostText, newPost, setCurrentProfileInfo })(ProfileContainerWithUrl)
