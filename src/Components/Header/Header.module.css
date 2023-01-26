@@ -6,8 +6,18 @@
 
 .header img {
   height: 50px;
-  
+
 }
-.header__container{
+
+.header__container {
+  float: right;
+}
+
+.header__profileName {
+  float: right;
+  padding: 10px;
+}
+
+.header__avatar {
   float: right;
 }

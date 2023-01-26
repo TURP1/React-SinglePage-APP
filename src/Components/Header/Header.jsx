@@ -1,6 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom';
-import obj from './Header.module.css'
+import obj from './Header.module.css';
+import defaultPhoto from '../../assets/images/default_photo.jpg'
 
 const Header = (props)=>{
 
@@ -10,7 +11,10 @@ const Header = (props)=>{
         <div className={obj.header__container}>
           {!props.authorized
           ?<NavLink to='/login'>Login</NavLink>
-          : <div>{props.email}</div>}
+          : <div>
+            <img className={obj.header__avatar} src={props.littleImage?props.littleImage:defaultPhoto} /> 
+            <div className={obj.header__profileName}>{props.email}</div>
+            </div>}
           
         </div>
       </header>

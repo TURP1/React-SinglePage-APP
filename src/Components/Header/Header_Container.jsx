@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from './Header'
 import axios from 'axios';
-import { setUserData, setAuthUser } from '../../Redux/auth_reducer';
+import { setUserData, setAuthUser, setLittleImage } from '../../Redux/auth_reducer';
 import { connect } from 'react-redux';
 
 class Header_Component extends React.Component {
@@ -13,7 +13,10 @@ class Header_Component extends React.Component {
           let { id, email, login } = response.data.data;
           this.props.setUserData(id, email, login);
           this.props.setAuthUser(true);
-          debugger
+          axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${id}`)
+          .then(response => {
+            this.props.setLittleImage(response.data.photos.small);
+          })
         }
       })
   }
@@ -26,8 +29,8 @@ class Header_Component extends React.Component {
 let mapStateToProps = (state) => {
   return {
     authorized: state.authReducer.authorized,
-    email: state.authReducer.email
-
+    email: state.authReducer.email,
+    littleImage: state.authReducer.littleImage
   }
 }
-export default connect(mapStateToProps, { setUserData, setAuthUser })(Header_Component);
+export default connect(mapStateToProps, { setUserData, setAuthUser, setLittleImage })(Header_Component);
