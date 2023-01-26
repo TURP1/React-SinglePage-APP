@@ -14,16 +14,19 @@ class Header_Component extends React.Component {
           this.props.setUserData(id, email, login);
           this.props.setAuthUser(true);
           axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${id}`)
-          .then(response => {
-            this.props.setLittleImage(response.data.photos.small);
-          })
-        }
+            .then(response => {
+              this.props.setLittleImage(response.data.photos.small);
+            })
+        };
       })
-  }
+  };
+
   render() {
     return <Header {...this.props} />
   };
 };
+
+
 
 
 let mapStateToProps = (state) => {

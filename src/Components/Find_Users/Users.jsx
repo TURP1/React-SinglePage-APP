@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 import { NavLink, Route } from "react-router-dom";
 import defaultPhoto from '../../assets/images/default_photo.jpg';
@@ -16,8 +17,8 @@ const Users = (props) => {
                     </NavLink>
                     <div className={obj.findUsers_followed_btn}>
                         {u.followed
-                            ? <button onClick={() => { props.userUnFollow(u.id) }}>Unfollow</button>
-                            : <button onClick={() => { props.userFollow(u.id) }} >Follow</button>} </div>
+                            ? <button onClick={() => {props.unFollow(u.id)}}>Unfollow</button>
+                            : <button onClick={() => {props.follow(u.id)}} >Follow</button>} </div>
                 </div>
                 <div className={obj.findUsers_info_container}>
                     <div className={obj.findUsers_info_fullname_status}>

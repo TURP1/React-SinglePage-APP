@@ -1,6 +1,6 @@
 
 import { connect } from "react-redux";
-import { userFollow, userUnFollow, setUsers, setUserPage, setTotalCount, setFetch} from "../../Redux/find_users_reducer";
+import { userFollow, userUnFollow, setUsers, setUserPage, setTotalCount, setFetch } from "../../Redux/find_users_reducer";
 import axios from "axios";
 import React from "react";
 import Users from "./Users";
@@ -12,7 +12,8 @@ class UsersContainer extends React.Component {
 
     componentDidMount() {
         this.props.setFetch(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.userPage}&count=${this.props.usersInOnePage}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.userPage}&count=${this.props.usersInOnePage}`,
+            { withCredentials: true })
             .then(response => {
                 this.props.setFetch(false);
                 this.props.setUsers(response.data.items);
@@ -21,16 +22,41 @@ class UsersContainer extends React.Component {
     }
 
     onPageChanged = (changedPage) => {
-         if (changedPage !== this.props.userPage){
+        if (changedPage !== this.props.userPage) {
             this.props.setUserPage(changedPage);
             this.props.setFetch(true);
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${changedPage}&count=${this.props.usersInOnePage}`)
+            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${changedPage}&count=${this.props.usersInOnePage}`,
+                { withCredentials: true })
                 .then(response => {
                     this.props.setFetch(false);
                     this.props.setUsers(response.data.items);
                 })
-            }
-    }
+        }
+    };
+
+    follow = (id) => {
+        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {},
+            {
+                withCredentials: true,
+                headers: {
+                    'API-KEY': '1fb709b9-92aa-4a14-b32f-e0c92ad59e35'
+                }
+            })
+            .then(this.props.userFollow(id));
+    };
+
+
+
+    unFollow = (id) => {
+        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${id}`,
+            {
+                withCredentials: true,
+                headers: {
+                    'API-KEY': '1fb709b9-92aa-4a14-b32f-e0c92ad59e35'
+                }
+            })
+            .then(this.props.userUnFollow(id));
+    };
 
     render() {
         return <>
@@ -43,11 +69,13 @@ class UsersContainer extends React.Component {
                     usersInOnePage={this.props.usersInOnePage}
                     userPage={this.props.userPage}
                     onPageChanged={this.onPageChanged}
-                    />}
+                    follow={this.follow}
+                    unFollow={this.unFollow}
+                />}
         </>
 
 
-        
+
     }
 }
 
