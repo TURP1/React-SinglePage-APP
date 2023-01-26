@@ -1,10 +1,11 @@
 
 import { connect } from "react-redux";
 import { userFollow, userUnFollow, setUsers, setUserPage, setTotalCount, setFetch } from "../../Redux/find_users_reducer";
-import axios from "axios";
 import React from "react";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
+import usersAPI from "../../API/api";
+
 
 
 
@@ -12,8 +13,7 @@ class UsersContainer extends React.Component {
 
     componentDidMount() {
         this.props.setFetch(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.userPage}&count=${this.props.usersInOnePage}`,
-            { withCredentials: true })
+        usersAPI.getUsers(this.props.userPage, this.props.usersInOnePage)
             .then(response => {
                 this.props.setFetch(false);
                 this.props.setUsers(response.data.items);
@@ -25,8 +25,7 @@ class UsersContainer extends React.Component {
         if (changedPage !== this.props.userPage) {
             this.props.setUserPage(changedPage);
             this.props.setFetch(true);
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${changedPage}&count=${this.props.usersInOnePage}`,
-                { withCredentials: true })
+            usersAPI.getUsers(changedPage, this.props.usersInOnePage)
                 .then(response => {
                     this.props.setFetch(false);
                     this.props.setUsers(response.data.items);
@@ -35,26 +34,12 @@ class UsersContainer extends React.Component {
     };
 
     follow = (id) => {
-        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {},
-            {
-                withCredentials: true,
-                headers: {
-                    'API-KEY': '1fb709b9-92aa-4a14-b32f-e0c92ad59e35'
-                }
-            })
+        usersAPI.follow(id)
             .then(this.props.userFollow(id));
     };
 
-
-
     unFollow = (id) => {
-        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${id}`,
-            {
-                withCredentials: true,
-                headers: {
-                    'API-KEY': '1fb709b9-92aa-4a14-b32f-e0c92ad59e35'
-                }
-            })
+        usersAPI.unFollow(id)
             .then(this.props.userUnFollow(id));
     };
 
@@ -73,9 +58,6 @@ class UsersContainer extends React.Component {
                     unFollow={this.unFollow}
                 />}
         </>
-
-
-
     }
 }
 
@@ -88,19 +70,6 @@ let mapPropsToState = (state) => {
         isFetched: state.findUsersPage.isFetched
     }
 };
-// OLD DISPATCH
-// let mapDispatchToState = (dispatch) => {
-//     return {
-//         userFollow: (id) => { dispatch(USER_FOLLOW_AC(id)) },
-//         userUnFollow: (id) => { dispatch(USER_UNFOLLOW_AC(id)) },
-//         setUsers: (users) => { dispatch(SET_USER_AC(users)) },
-//         setUserPage: (userPage) => { dispatch(SET_USER_PAGE_AC(userPage)) },
-//         setTotalCount: (usersTotalCount) => { dispatch(SET_TOTAL_COUNT_AC(usersTotalCount)) },
-//         setFetch: (isFetched) => { dispatch(SET_FETCHING_AC(isFetched)) },
-
-
-//     }
-// }
 
 const Find_Users_Container = connect(mapPropsToState, {
     userFollow,
