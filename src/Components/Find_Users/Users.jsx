@@ -1,4 +1,3 @@
-import axios from "axios";
 import React from "react";
 import { NavLink, Route } from "react-router-dom";
 import defaultPhoto from '../../assets/images/default_photo.jpg';
@@ -8,6 +7,7 @@ import obj from './Find_Users.module.css';
 const Users = (props) => {
     let usersStore = props.users;
     let mapUser = usersStore.map((u) => {
+
         return (
             <div className={obj.findUsers_block} key={u.id}>
                 <div className={obj.findUsers_ava_follow}>
@@ -17,8 +17,12 @@ const Users = (props) => {
                     </NavLink>
                     <div className={obj.findUsers_followed_btn}>
                         {u.followed
-                            ? <button onClick={() => {props.unFollow(u.id)}}>Unfollow</button>
-                            : <button onClick={() => {props.follow(u.id)}} >Follow</button>} </div>
+                            ? <button disabled={props.isFollowingFetched.some(id => id === u.id)} onClick={() => {
+                                props.unFollow(u.id)
+                            }}>Unfollow</button>
+                            : <button disabled={props.isFollowingFetched.some(id => id === u.id)} onClick={() => {
+                                props.follow(u.id)
+                                }} >Follow</button>} </div>
                 </div>
                 <div className={obj.findUsers_info_container}>
                     <div className={obj.findUsers_info_fullname_status}>
@@ -54,7 +58,7 @@ const Users = (props) => {
                         onClick={(e) => { props.onPageChanged(page) }}
                         className={page === props.userPage ? obj.checkedPage : undefined}>{page}</span>
                 })}
-
+                
             </div>
             {mapUser}
         </div>

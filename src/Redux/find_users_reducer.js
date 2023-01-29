@@ -4,6 +4,9 @@ const SET_USER = "SET_USER";
 const SET_USER_PAGE = "SET_USER_PAGE";
 const SET_TOTAL_COUNT = "SET_TOTAL_COUNT";
 const SET_FETCHING = "SET_FETCHING";
+const SET_FOLLOWING_FETCH = "SET_FOLLOWING_FETCH";
+
+
 
 
 let initialState = {
@@ -13,6 +16,7 @@ let initialState = {
     usersInOnePage: 100,
     usersTotalCount: 10,
     isFetched: true,
+    isFollowingFetched: []
 }
 
 const findUserReducer = (state = initialState, action) => {
@@ -54,6 +58,13 @@ const findUserReducer = (state = initialState, action) => {
             return {
                 ...state, isFetched: action.isFetched
             }
+        case SET_FOLLOWING_FETCH:
+            return {
+                ...state,
+                isFollowingFetched: action.isFetched
+                    ? [...state.isFollowingFetched, action.id]
+                    : state.isFollowingFetched.filter(id => id != action.id)
+            }
         default:
             return state;
     }
@@ -70,6 +81,11 @@ export const setUserPage = (userPage) => ({ type: SET_USER_PAGE, userPage });
 export const setTotalCount = (usersTotalCount) => ({ type: SET_TOTAL_COUNT, usersTotalCount });
 
 export const setFetch = (isFetched) => ({ type: SET_FETCHING, isFetched });
+
+export const setFollowingFetch = (isFetched, id) => ({ type: SET_FOLLOWING_FETCH, isFetched, id });
+
+
+
 
 
 

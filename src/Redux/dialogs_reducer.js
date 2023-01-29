@@ -43,8 +43,10 @@ const dialogsReducer = (state = initialState, action) => {
                 user: true
             };
 
-            let newState = { ...state, 
-            users: [...state.users] };
+            let newState = {
+                ...state,
+                users: [...state.users]
+            };
             for (const i of newState.users) {
                 newState.users[i] = { ...state.users[i] };
             }
@@ -53,8 +55,10 @@ const dialogsReducer = (state = initialState, action) => {
             return newState;
         }
         case UPDATE_MESSAGE_TEXT: {
-            return { ...state,
-                 newMessageText: action.newText  };
+            return {
+                ...state,
+                newMessageText: action.newText
+            };
         }
         default:
             return state;
