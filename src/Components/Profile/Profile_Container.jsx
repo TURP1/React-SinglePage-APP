@@ -1,17 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import usersAPI from '../../API/api';
-import { updatePostText, newPost, setCurrentProfileInfo } from '../../Redux/profile_reducer';
+import { updatePostText, newPost, getUserThunkAC } from '../../Redux/profile_reducer';
 import Profile from './Profile';
 
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
-        usersAPI.getProfile(this.props.router.params.UserId)
-            .then(response => {
-                this.props.setCurrentProfileInfo(response.data);
-            })
+        this.props.getUserThunkAC(this.props.router.params.UserId);
     }
     render() {
         return <Profile
@@ -52,6 +48,6 @@ function withRouter(Component) {
     return ComponentWithRouterProp;
 }
 
-let ProfileContainerWithUrl =  withRouter(ProfileContainer)
+let ProfileContainerWithUrl = withRouter(ProfileContainer)
 
-export default connect(mapStateToProps, { updatePostText, newPost, setCurrentProfileInfo })(ProfileContainerWithUrl)
+export default connect(mapStateToProps, { updatePostText, newPost, getUserThunkAC })(ProfileContainerWithUrl)

@@ -1,58 +1,25 @@
-
 import { connect } from "react-redux";
-import { userFollow, userUnFollow, setUsers, setUserPage, setTotalCount, setFetch, setFollowingFetch } from "../../Redux/find_users_reducer";
+import {
+    userFollow, userUnFollow, setUserPage,
+    getUsersThunkActionCreator, followThunkAC, unFollowThunkAC
+} from "../../Redux/find_users_reducer";
 import React from "react";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
-import usersAPI from "../../API/api";
-
 
 
 
 class UsersContainer extends React.Component {
 
     componentDidMount() {
-        this.props.setFetch(true);
-        usersAPI.getUsers(this.props.userPage, this.props.usersInOnePage)
-            .then(data => {
-                this.props.setFetch(false);
-                this.props.setUsers(data.items);
-                this.props.setTotalCount(data.totalCount);
-            })
+        this.props.getUsersThunkActionCreator(this.props.userPage, this.props.usersInOnePage)
     };
 
     onPageChanged = (changedPage) => {
         if (changedPage !== this.props.userPage) {
             this.props.setUserPage(changedPage);
-            this.props.setFetch(true);
-            usersAPI.getUsers(changedPage, this.props.usersInOnePage)
-                .then(data => {
-                    this.props.setFetch(false);
-                    this.props.setUsers(data.items);
-                })
+            this.props.getUsersThunkActionCreator(changedPage, this.props.usersInOnePage);
         }
-    };
-
-    follow = (id) => {
-        this.props.setFollowingFetch(true, id)
-        usersAPI.follow(id)
-            .then(() => {
-                this.props.userFollow(id);
-                this.props.setFollowingFetch(false, id)
-            }
-            )
-
-    };
-
-    unFollow = (id) => {
-
-        this.props.setFollowingFetch(true, id)
-        usersAPI.unFollow(id)
-            .then(() => {
-                this.props.userUnFollow(id)
-                this.props.setFollowingFetch(false, id)
-            }
-            )
     };
 
     render() {
@@ -60,14 +27,12 @@ class UsersContainer extends React.Component {
             {this.props.isFetched === true
                 ? <Preloader />
                 : <Users users={this.props.users}
-                    userUnFollow={this.props.userUnFollow}
-                    userFollow={this.props.userFollow}
                     usersTotalCount={this.props.usersTotalCount}
                     usersInOnePage={this.props.usersInOnePage}
                     userPage={this.props.userPage}
                     onPageChanged={this.onPageChanged}
-                    follow={this.follow}
-                    unFollow={this.unFollow}
+                    follow={this.props.followThunkAC}
+                    unFollow={this.props.unFollowThunkAC}
                     isFollowingFetched={this.props.isFollowingFetched}
                 />}
         </>
@@ -86,13 +51,8 @@ let mapPropsToState = (state) => {
 };
 
 const Find_Users_Container = connect(mapPropsToState, {
-    userFollow,
-    userUnFollow,
-    setUsers,
-    setUserPage,
-    setTotalCount,
-    setFetch,
-    setFollowingFetch
+    userFollow, userUnFollow, setUserPage,
+    getUsersThunkActionCreator, followThunkAC, unFollowThunkAC
 })(UsersContainer)
 
 

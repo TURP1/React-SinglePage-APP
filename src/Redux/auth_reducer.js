@@ -1,3 +1,5 @@
+import usersAPI from "../API/api";
+
 const SET_USER_DATA = "SET_USER_DATA";
 const SET_AUTH = "SET_AUTH";
 const SET_LITTLE_IMAGE = "SET_LITTLE_IMAGE";
@@ -38,13 +40,28 @@ const authReducer = (state = initialState, action) => {
     }
 };
 
-export const setUserData = (id, email, login) => ({ type: SET_USER_DATA, data: { id, email, login } });
+const setUserData = (id, email, login) => ({ type: SET_USER_DATA, data: { id, email, login } });
 
-export const setAuthUser = (isAuth) => ({ type: SET_AUTH, isAuth });
+const setAuthUser = (isAuth) => ({ type: SET_AUTH, isAuth });
 
-export const setLittleImage = (littleImage) => ({ type: SET_LITTLE_IMAGE, littleImage });
+const setLittleImage = (littleImage) => ({ type: SET_LITTLE_IMAGE, littleImage });
 
-
+export const authMeThunkAC = () => {
+    return (dispatch) => {
+        usersAPI.authMe()
+            .then(response => {
+                if (response.data.resultCode !== 1) {
+                    let { id, email, login } = response.data.data;
+                    dispatch(setUserData(id, email, login));
+                    dispatch(setAuthUser(true));
+                    usersAPI.getProfile(id)
+                        .then(response => {
+                            dispatch(setLittleImage(response.data.photos.small));
+                        })
+                };
+            })
+    }
+}
 
 
 

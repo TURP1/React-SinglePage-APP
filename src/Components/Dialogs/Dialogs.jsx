@@ -20,8 +20,8 @@ const Dialogs = (props) => {
         {DialogsElement}
       </div>
       <DialogUserMessages dialogsPageData={props.dialogsPageData}
-        newMessage={props.newMessage}
-        updateMessageText={props.updateMessageText} />
+        newMessage={props.newMessageAC}
+        updateMessageText={props.updateMessageTextAC} />
     </div>
 
   );

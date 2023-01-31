@@ -1,4 +1,3 @@
-import React from 'react'
 import { connect } from 'react-redux';
 import Navbar from './Navbar';
 
@@ -9,10 +8,7 @@ let mapStateToProps = (state) => {
   };
 };
 
-let mapDispatchToProps = () => {
-  return{}
-}
 
-const NavbarContainer = connect(mapStateToProps, mapDispatchToProps)(Navbar)
+const NavbarContainer = connect(mapStateToProps, {})(Navbar)
 
 export default NavbarContainer;

@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, Route } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import defaultPhoto from '../../assets/images/default_photo.jpg';
 import obj from './Find_Users.module.css';
 
@@ -13,7 +13,7 @@ const Users = (props) => {
                 <div className={obj.findUsers_ava_follow}>
                     <NavLink to={`/profile/${u.id}`} >
                         <img className={obj.findUsers_ava}
-                            src={u.photos.small !== null ? u.photos.small : defaultPhoto} alt="" />
+                            src={u.photos.small !== null ? u.photos.small : defaultPhoto} alt="1" />
                     </NavLink>
                     <div className={obj.findUsers_followed_btn}>
                         {u.followed

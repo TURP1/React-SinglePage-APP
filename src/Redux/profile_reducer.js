@@ -1,3 +1,5 @@
+import usersAPI from "../API/api";
+
 const NEW_POST = "NEW-POST";
 const UPDATE_POST_TEXT = "UPDATE-POST-TEXT";
 const SET_CURRENT_PROFILE_REDUCER = "SET_CURRENT_PROFILE_REDUCER";
@@ -63,9 +65,11 @@ const profileReducer = (state = initialState, action) => {
                     lookingForAJob: action.profile.lookingForAJob,
                     fullName: action.profile.fullName,
                     userId: action.profile.fullName,
-                    photos: { ...action.profile.photos,
-                         small: action.profile.photos.small,
-                         large: action.profile.photos.large  }
+                    photos: {
+                        ...action.profile.photos,
+                        small: action.profile.photos.small,
+                        large: action.profile.photos.large
+                    }
                 }
             }
         }
@@ -78,9 +82,16 @@ export const newPost = () => ({ type: NEW_POST });
 
 export const updatePostText = (text) => (
     { type: UPDATE_POST_TEXT, newText: text });
-export const setCurrentProfileInfo = (profile) => (
+const setCurrentProfileInfo = (profile) => (
     { type: SET_CURRENT_PROFILE_REDUCER, profile });
 
-
+export const getUserThunkAC = (userId) => {
+    return (dispatch) => {
+        usersAPI.getProfile(userId)
+            .then(response => {
+                dispatch(setCurrentProfileInfo(response.data));
+            })
+    }
+}
 
 export default profileReducer;

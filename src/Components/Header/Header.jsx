@@ -12,7 +12,7 @@ const Header = (props)=>{
           {!props.authorized
           ?<NavLink to='/login'>Login</NavLink>
           : <div>
-            <img className={obj.header__avatar} src={props.littleImage?props.littleImage:defaultPhoto} /> 
+            <img className={obj.header__avatar} src={props.littleImage?props.littleImage:defaultPhoto} alt="2"/> 
             <div className={obj.header__profileName}>{props.email}</div>
             </div>}
           

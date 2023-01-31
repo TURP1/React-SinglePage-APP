@@ -1,8 +1,8 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import DialogsContainer from './Components/Dialogs/Dialogs_Container';
-import Find_Users_Container from './Components/Find_Users/Find_Users_Container';
-import Header_Component from './Components/Header/Header_Container';
+import FindUsersContainer from './Components/Find_Users/Find_Users_Container';
+import HeaderComponent from './Components/Header/Header_Container';
 import Music from './Components/Music/Music';
 import NavbarContainer from './Components/Navbar/Navbar_Container';
 import News from './Components/News/News';
@@ -13,7 +13,7 @@ function App(props) {
 
   return (
     <div className="app-wrapper">
-      <Header_Component />
+      <HeaderComponent />
       <NavbarContainer store={props.store} />
 
       <div className='app-wrapper__content'>
@@ -31,7 +31,7 @@ function App(props) {
           <Route path='/news' element={<News />} />
           <Route path='/music' element={<Music />} />
           <Route path='/settings' element={<Settings />} />
-          <Route path='/findUsers' element={<Find_Users_Container 
+          <Route path='/findUsers' element={<FindUsersContainer 
           store={props.store}/>}
            />
         </Routes>

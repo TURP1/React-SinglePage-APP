@@ -1,3 +1,5 @@
+import usersAPI from "../API/api";
+
 const USER_FOLLOW = "USER_FOLLOW";
 const USER_UNFOLLOW = "USER_UNFOLLOW";
 const SET_USER = "SET_USER";
@@ -63,26 +65,65 @@ const findUserReducer = (state = initialState, action) => {
                 ...state,
                 isFollowingFetched: action.isFetched
                     ? [...state.isFollowingFetched, action.id]
-                    : state.isFollowingFetched.filter(id => id != action.id)
+                    : state.isFollowingFetched.filter(id => id !== action.id)
             }
         default:
             return state;
     }
 };
 
+
+
 export const userFollow = (userID) => ({ type: USER_FOLLOW, id: userID });
 
 export const userUnFollow = (userID) => ({ type: USER_UNFOLLOW, id: userID });
 
-export const setUsers = (users) => ({ type: SET_USER, users });
-
 export const setUserPage = (userPage) => ({ type: SET_USER_PAGE, userPage });
 
-export const setTotalCount = (usersTotalCount) => ({ type: SET_TOTAL_COUNT, usersTotalCount });
+const setUsers = (users) => ({ type: SET_USER, users });
 
-export const setFetch = (isFetched) => ({ type: SET_FETCHING, isFetched });
+const setTotalCount = (usersTotalCount) => ({ type: SET_TOTAL_COUNT, usersTotalCount });
 
-export const setFollowingFetch = (isFetched, id) => ({ type: SET_FOLLOWING_FETCH, isFetched, id });
+const setFetch = (isFetched) => ({ type: SET_FETCHING, isFetched });
+
+const setFollowingFetch = (isFetched, id) => ({ type: SET_FOLLOWING_FETCH, isFetched, id });
+
+export const getUsersThunkActionCreator = (userPage, usersInOnePage) => {
+    return (dispatch) => {
+        dispatch(setFetch(true));
+        usersAPI.getUsers(userPage, usersInOnePage)
+            .then(data => {
+                dispatch(setFetch(false));
+                dispatch(setUsers(data.items));
+                dispatch(setTotalCount(data.totalCount));
+            }
+            )
+    }
+};
+
+export const followThunkAC = (id) => {
+    return (dispatch) => {
+        dispatch(setFollowingFetch(true, id));
+        usersAPI.follow(id)
+            .then(() => {
+                dispatch(userFollow(id));
+                dispatch(setFollowingFetch(false, id));
+            }
+            )
+    }
+};
+export const unFollowThunkAC = (id) => {
+    return (dispatch) => {
+        dispatch(setFollowingFetch(true, id));
+        usersAPI.unFollow(id)
+            .then(() => {
+                dispatch(userUnFollow(id));
+                dispatch(setFollowingFetch(false, id));
+            }
+            )
+    }
+};
+
 
 
 
