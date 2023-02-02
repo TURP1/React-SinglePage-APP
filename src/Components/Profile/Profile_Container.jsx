@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import withAuthNavigate from '../../HOC/withNavigateHOC';
 import { updatePostText, newPost, getUserThunkAC } from '../../Redux/profile_reducer';
 import Profile from './Profile';
 
@@ -8,12 +9,9 @@ import Profile from './Profile';
 class ProfileContainer extends React.Component {
     componentDidMount() {
         let userId = this.props.router.params.UserId;
-        this.props.getUserThunkAC(userId);
+            this.props.getUserThunkAC(userId);
     }
     render() {
-        if(!this.props.authMe){
-           return <Navigate to='/login' />
-        }
         return <Profile
             postsData={this.props.postsData}
             newValue={this.props.newValue}
@@ -24,7 +22,7 @@ class ProfileContainer extends React.Component {
         />
     }
 
-}
+};
 
 let mapStateToProps = (state) => {
 
@@ -53,6 +51,8 @@ function withRouter(Component) {
     return ComponentWithRouterProp;
 }
 
-let ProfileContainerWithUrl = withRouter(ProfileContainer)
+let AuthNavigateComponent = withAuthNavigate(ProfileContainer);
+
+let ProfileContainerWithUrl = withRouter(AuthNavigateComponent);
 
 export default connect(mapStateToProps, { updatePostText, newPost, getUserThunkAC })(ProfileContainerWithUrl)
