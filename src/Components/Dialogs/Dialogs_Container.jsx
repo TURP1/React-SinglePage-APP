@@ -4,7 +4,8 @@ import Dialogs from './Dialogs';
 
 let mapStateToProps = (state) => {
   return {
-    dialogsPageData: state.dialogsPage
+    dialogsPageData: state.dialogsPage,
+    authMe: state.authReducer.authorized
   };
 };
 

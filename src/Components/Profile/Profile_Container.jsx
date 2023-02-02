@@ -1,15 +1,19 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { updatePostText, newPost, getUserThunkAC } from '../../Redux/profile_reducer';
 import Profile from './Profile';
 
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
-        this.props.getUserThunkAC(this.props.router.params.UserId);
+        let userId = this.props.router.params.UserId;
+        this.props.getUserThunkAC(userId);
     }
     render() {
+        if(!this.props.authMe){
+           return <Navigate to='/login' />
+        }
         return <Profile
             postsData={this.props.postsData}
             newValue={this.props.newValue}
@@ -28,7 +32,8 @@ let mapStateToProps = (state) => {
         postsData: state.profilePage.postsData,
         newValue: state.profilePage.postNewValue,
         postImageData: state.profilePage.postImagesData,
-        currentProfileInfo: state.profilePage.currentProfileInfo
+        currentProfileInfo: state.profilePage.currentProfileInfo,
+        authMe: state.authReducer.authorized
     }
 
 };
