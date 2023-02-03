@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import withAuthNavigate from '../../HOC/withNavigateHOC';
+import { compose } from 'redux';
+import withAuthNavigate from '../../HOC/withAuthNavigateHOC';
+import withRouter from '../../HOC/withRouterHOC';
 import { updatePostText, newPost, getUserThunkAC } from '../../Redux/profile_reducer';
 import Profile from './Profile';
 
@@ -36,23 +37,9 @@ let mapStateToProps = (state) => {
 
 };
 
-function withRouter(Component) {
-    function ComponentWithRouterProp(props) {
-        let location = useLocation();
-        let navigate = useNavigate();
-        let params = useParams();
-        return (
-            <Component
-                {...props}
-                router={{ location, navigate, params }}
-            />
-        );
-    }
-    return ComponentWithRouterProp;
-}
 
-let AuthNavigateComponent = withAuthNavigate(ProfileContainer);
-
-let ProfileContainerWithUrl = withRouter(AuthNavigateComponent);
-
-export default connect(mapStateToProps, { updatePostText, newPost, getUserThunkAC })(ProfileContainerWithUrl)
+export default compose (
+    connect(mapStateToProps, { updatePostText, newPost, getUserThunkAC }),
+    withRouter,
+    withAuthNavigate
+) (ProfileContainer)
