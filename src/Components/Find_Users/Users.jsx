@@ -7,7 +7,6 @@ import obj from './Find_Users.module.css';
 const Users = (props) => {
     let usersStore = props.users;
     let mapUser = usersStore.map((u) => {
-
         return (
             <div className={obj.findUsers_block} key={u.id}>
                 <div className={obj.findUsers_ava_follow}>

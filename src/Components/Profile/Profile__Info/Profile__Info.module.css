@@ -31,3 +31,6 @@
   font-weight: bold;
   margin: 0 auto;
 }
+.profile__info_details_status{
+  text-align: center;
+}

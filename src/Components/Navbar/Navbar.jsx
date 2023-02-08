@@ -13,7 +13,7 @@ const Navbar = (props) => {
   return (
     <nav className={obj.nav}>
       <div className={obj.item}>
-        <NavLink to={`/profile/${props.myId}`} onClick={() => { props.getUserThunkAC(props.myId) }} className={navData => navData.isActive ? obj.active : obj.item}>
+        <NavLink to={`/profile/${props.myId}`} onClick={() => { props.getUser(props.myId) }} className={navData => navData.isActive ? obj.active : obj.item}>
           Profile
         </NavLink>
       </div>

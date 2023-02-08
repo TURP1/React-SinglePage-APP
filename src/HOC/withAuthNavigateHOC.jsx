@@ -12,7 +12,7 @@ let mapStateToProps = (state) => {
 let withAuthNavigate = (Component) => {
 
     let NavigateComponent = (props) => {
-        debugger
+
         if (!props.authMe) {
             return <Navigate to='/login' />
         }

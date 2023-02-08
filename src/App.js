@@ -11,7 +11,7 @@ import ProfileContainer from './Components/Profile/Profile_Container';
 import Settings from './Components/Settings/Settings';
 
 function App(props) {
-
+  
   return (
     <div className="app-wrapper">
       <HeaderComponent />

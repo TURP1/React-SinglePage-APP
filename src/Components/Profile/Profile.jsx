@@ -4,14 +4,18 @@ import obj from './Profile.module.css'
 import ProfileInfo from './Profile__Info/Profile__Info';
 
 const Profile = (props) => {
+    
     return (
         <div className={obj.content}>
-            <ProfileInfo currentProfileInfo={props.currentProfileInfo} />
+            <ProfileInfo currentProfileInfo={props.currentProfileInfo}
+                status={props.status}
+                changeStatus={props.changeStatus} />
             <MyPosts postsData={props.postsData}
                 updatePostText={props.updatePostText}
                 newPost={props.newPost}
                 newValue={props.newValue}
-                postImageData={props.postImageData} />
+                postImageData={props.postImageData}
+            />
         </div>
     );
 };
