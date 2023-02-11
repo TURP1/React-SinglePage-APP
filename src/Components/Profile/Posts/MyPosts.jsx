@@ -1,39 +1,52 @@
 import React from 'react';
 import obj from './MyPosts.module.css'
 import Post from './Post/Post';
+import { Field, reduxForm } from 'redux-form'
+import  { maxLength300, Textarea } from '../../common/FormControls/FormControls';
 
-const MyPosts = () => {
 
-    const PostsData = [
-        { id: 1, message: "Hello , I `m here", likeCount: 15 },
-        { id: 2, message: "My first post", likeCount: 10 }
-    ];
+export let PostForm = props => {
 
-    const PostElement = PostsData.map((post) => {
+    const { handleSubmit } = props
+
+    return <form onSubmit={handleSubmit}>{
+        <div>
+            <Field cols="50" rows="3" type="text" component={Textarea}
+                name="postText" className={obj.myPosts_textarea} validate={maxLength300} />
+            <button type="submit">Submit</button>
+        </div>
+    }</form>
+}
+
+PostForm = reduxForm({
+    form: 'postForm'
+})(PostForm)
+
+
+const MyPosts = (props) => {
+
+
+    const PostElement = props.postsData.map((post) => {
+
         return (
-            <Post message={post.message} likeCount={post.likeCount} />
+            <Post message={post.message} likeCount={post.likeCount} postImagesData={props.postImageData} />
         );
     });
 
 
     return (
+
         <div className={obj.myPosts}>
             <div>
                 <div>
-                    <h3>My posts</h3>
+                    <h2>My posts</h2>
                 </div>
-                <div>
-                    <textarea></textarea>
-                </div>
-                <div>
-                    <button> Submit</button>
-                </div>
-
-
+                <PostForm onSubmit={props.onSubmit} />
             </div>
+
             <div>
                 <div className={obj.myPostsBlock}>
-                    <h4>my News</h4>
+                    <h3>my News</h3>
                     <div className={obj.newPost}>new post</div>
                     {PostElement}
                 </div>

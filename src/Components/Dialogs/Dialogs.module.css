@@ -6,6 +6,8 @@
 
 .dialog__users {
     padding: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 .dialog__users.active {

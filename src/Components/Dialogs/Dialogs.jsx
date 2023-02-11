@@ -1,30 +1,33 @@
 import React from 'react'
+import { Navigate } from 'react-router-dom';
 import obj from './Dialogs.module.css'
-import DialogUserMessages from './Dialog__User/Dialog__User__Messages/Dialog__User__Messages';
 import DialogUser from "./Dialog__User/Dialog__User";
+import DialogUserMessagesContainer from './Dialog__User__Messages/Dialog__User__Messages_Container';
 
 
 
-const Dialogs = () => {
 
-  const DialogsData = [
-    { id: 1, userName: "Sasha" },
-    { id: 2, userName: "Ivan" },
-    { id: 3, userName: "Leroy" },
-    { id: 4, userName: "Leo" },
-    { id: 5, userName: "Vlad" },
-  ];
+const Dialogs = (props) => {
 
-  const DialogsElement = DialogsData.map(dialog => (< DialogUser id={dialog.id} userName={dialog.userName} className={obj.dialog__user} />))
+  const DialogsElement = props.dialogsPageData.users.map(user => (< DialogUser
+    id={user.id}
+    userName={user.name}
+    logo={user.logo}
+    className={obj.dialog__user} />));
 
-
+  if (!props.authMe) {
+    return <Navigate to='/login' />
+  }
   return (
     <div className={obj.dialogs}>
       <div className={obj.dialog__users}>
         {DialogsElement}
       </div>
-      <DialogUserMessages />
+      <DialogUserMessagesContainer dialogsPageData={props.dialogsPageData}
+        addNewMessage={props.addNewMessage} />
     </div>
+
   );
+
 };
 export default Dialogs;

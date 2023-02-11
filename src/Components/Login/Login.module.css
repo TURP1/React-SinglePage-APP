@@ -1,0 +1,10 @@
+.loginFormWrapper {
+ text-align: center;
+}
+.loginForm{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 43%;
+
+}

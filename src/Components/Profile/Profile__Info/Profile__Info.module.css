@@ -1,7 +1,36 @@
-.content__background {
-    width: 900px;
-    height: 200px;
-  }
-.content_avatarAndDescr{
+.profile__info_container{
+  display: flex;
+  flex-direction: row;
+}
+.profile__info_avatar {
   padding: 20px;
+  }
+  .profile__info_avatar img {
+    max-width: 500px;
+  }
+.profile__info_details_container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 50px;
+
+}
+.profile__info_details_container_row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  justify-self: flex-start;
+  padding-bottom: 20px;
+}
+.profile__info_details_social{
+  text-align: center;
+  margin-top: auto;
+}
+.profile__info_details_name{
+  font-size: 45px;
+  font-weight: bold;
+  margin: 0 auto;
+}
+.profile__info_details_status{
+  text-align: center;
 }

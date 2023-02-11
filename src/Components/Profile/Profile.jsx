@@ -1,13 +1,19 @@
 import React from 'react'
-import MyPosts from './Posts/MyPosts';
+import PostContainer from './Posts/MyPosts_Container';
 import obj from './Profile.module.css'
 import ProfileInfo from './Profile__Info/Profile__Info';
 
-const Profile = ()=>{
-    return(
+const Profile = (props) => {
+    
+    return (
         <div className={obj.content}>
-       <ProfileInfo/>
-        <MyPosts/>
+            <ProfileInfo currentProfileInfo={props.currentProfileInfo}
+                status={props.status}
+                changeStatus={props.changeStatus} />
+            <PostContainer postsData={props.postsData}
+                addNewPost={props.addNewPost}
+                postImageData={props.postImageData}
+            />
         </div>
     );
 };

@@ -1,8 +1,23 @@
 .header {
   grid-area: h;
-  background-color: green
+  background-color: #fff;
+  border-bottom: 2px solid grey;
 }
 
 .header img {
-  height: 60px;
+  height: 50px;
+
+}
+
+.header__container {
+  float: right;
+}
+
+.header__profileName {
+  float: right;
+  padding: 10px;
+}
+
+.header__avatar {
+  float: right;
 }
