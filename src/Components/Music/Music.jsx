@@ -4,7 +4,7 @@ import obj from './Music.module.css'
 const Music = ()=>{
     return(
         <div>
-          Music
+          MUSIC
         </div>
     );
 };
