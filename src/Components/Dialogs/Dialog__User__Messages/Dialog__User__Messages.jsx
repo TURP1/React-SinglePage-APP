@@ -1,6 +1,26 @@
 import React from 'react';
 import obj from './Dialog__User__Messages.module.css'
 import DialogUserMessage from './Dialog__User__Messages_Message/Dialog__User__Messages-Message';
+import { Field, reduxForm } from 'redux-form'
+
+
+export let MessageForm = props => {
+  const { handleSubmit } = props
+  return <form onSubmit={handleSubmit}>{
+    <div>
+      <Field className={obj.dialog__user_messages_textarea} name="message" component="textarea" type="text" cols="50" rows="3"
+      />
+      <button className={obj.dialog__user_messages_btn} type="submit" > Send</button>
+    </div>
+  }</form>
+}
+
+MessageForm = reduxForm({
+  // a unique name for the form
+  form: 'messageForm'
+})(MessageForm)
+
+
 
 const DialogUserMessages = (props) => {
 
@@ -10,38 +30,18 @@ const DialogUserMessages = (props) => {
     )
   })
 
-  let textContentHtml = React.createRef();
+   
+    return (
+      <div className={obj.dialog__user__messages}>
+        <div>
+          {dialogs}
+        </div>
 
-  let onMessageAdd = () => {
-    props.newMessage();
-    clearInput();
-  };
-
-  function clearInput() {
-    textContentHtml.current.value = ``;
-  };
-
-  const onMessageChange = () => {
-    let text = textContentHtml.current.value;
-    props.updateMessageText(text);
-  };
-
-  return (
-    <div className={obj.dialog__user__messages}>
-      <div>
-        {dialogs}
+        <div className={obj.dialog__user_messages_text}>
+          <MessageForm onSubmit={props.submit} />
+        </div>
       </div>
-
-      <div className={obj.dialog__user_messages_text}>
-        <textarea className={obj.dialog__user_messages_textarea} ref={textContentHtml} cols="50" rows="3"
-          onChange={onMessageChange}
-          value={props.dialogsPageData.newMessageText}
-          onFocus={clearInput}
-        />
-        <button className={obj.dialog__user_messages_btn} onClick={onMessageAdd} > Send</button>
-      </div>
-    </div>
-  )
-}
+    )
+  }
 
 export default DialogUserMessages;

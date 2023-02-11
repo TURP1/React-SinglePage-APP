@@ -1,5 +1,6 @@
+import { reset } from "redux-form";
+
 const NEW_MESSAGE = "NEW-MESSAGE";
-const UPDATE_MESSAGE_TEXT = "UPDATE-MESSAGE-TEXT";
 
 let initialState = {
     users: [
@@ -27,8 +28,7 @@ let initialState = {
                 { id: 3, message: "Sup", user: false }
             ]
         }
-    ],
-    newMessageText: ``,
+    ]
 }
 
 
@@ -39,7 +39,7 @@ const dialogsReducer = (state = initialState, action) => {
         case NEW_MESSAGE: {
             newMessageInfo = {
                 id: 4,
-                message: state.newMessageText,
+                message: action.newText,
                 user: true
             };
 
@@ -54,21 +54,20 @@ const dialogsReducer = (state = initialState, action) => {
             newState.users[0].messagesData.push(newMessageInfo);
             return newState;
         }
-        case UPDATE_MESSAGE_TEXT: {
-            return {
-                ...state,
-                newMessageText: action.newText
-            };
-        }
         default:
             return state;
     }
 };
 
-export const newMessageAC = () => ({ type: NEW_MESSAGE });
+const newMessage = (text) => ({ type: NEW_MESSAGE, newText: text });
 
-export const updateMessageTextAC = (text) => ({
-    type: UPDATE_MESSAGE_TEXT, newText: text
-});
+export const addNewMessage = (text) => {
+    return(dispatch) => {
+        dispatch(newMessage(text));
+        dispatch(reset('messageForm'));
+    }
+}
+
+
 
 export default dialogsReducer;

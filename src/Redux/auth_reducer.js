@@ -58,6 +58,17 @@ export const getProfile = (id) => {
     };
 }
 
+export const loginMe = (email, password, rememberMe) => {
+    return (dispatch) => {
+        authAPI.loginMe(email, password, rememberMe)
+            .then(response => {
+                response.data.resultCode === 0
+                    ? alert(`success`)
+                    : alert(response.data.messages)
+            });
+    }
+};
+
 
 
 

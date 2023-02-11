@@ -1,8 +1,8 @@
+import { reset } from "redux-form";
 import { profileAPI } from "../API/api";
 
 
 const NEW_POST = "NEW-POST";
-const UPDATE_POST_TEXT = "UPDATE-POST-TEXT";
 const SET_CURRENT_PROFILE_REDUCER = "SET_CURRENT_PROFILE_REDUCER";
 const SET_CURRENT_PROFILE_STATUS = "SET_CURRENT_PROFILE_STATUS"
 
@@ -11,7 +11,6 @@ let initialState = {
         { id: 1, message: "Hello , I `m here", likeCount: 15 },
         { id: 2, message: "My first post", likeCount: 10 }
     ],
-    postNewValue: "",
     postImagesData: [
         { id: 1, src: "https://images.ctfassets.net/419eq8k54vnb/2DGf8OF1z9mQcyDQHodxNv/6ef4083f14fd912cebac09621bdca2b4/logo.png" }
     ],
@@ -36,7 +35,7 @@ let initialState = {
             large: null
         }
     },
-    currentProfileStatus : "default status"
+    currentProfileStatus: "default status"
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -44,7 +43,7 @@ const profileReducer = (state = initialState, action) => {
         case NEW_POST: {
             let newPostInfo = {
                 id: 3,
-                message: state.postNewValue,
+                message: action.newText,
                 likeCount: 0
             };
             return {
@@ -53,12 +52,7 @@ const profileReducer = (state = initialState, action) => {
                     newPostInfo]
             }
         }
-        case UPDATE_POST_TEXT: {
-            return {
-                ...state,
-                postNewValue: action.newText
-            };
-        }
+
         case SET_CURRENT_PROFILE_REDUCER: {
             return {
                 ...state,
@@ -87,12 +81,12 @@ const profileReducer = (state = initialState, action) => {
     }
 };
 
-export const newPost = () => ({ type: NEW_POST });
+const newPost = (text) => (
+    { type: NEW_POST, newText: text });
 
-export const updatePostText = (text) => (
-    { type: UPDATE_POST_TEXT, newText: text });
 const setCurrentProfileInfo = (profile) => (
     { type: SET_CURRENT_PROFILE_REDUCER, profile });
+
 const setCurrentProfileStatus = (status) => (
     { type: SET_CURRENT_PROFILE_STATUS, status });
 
@@ -116,13 +110,23 @@ export const changeStatus = (status) => {
     return (dispatch) => {
         profileAPI.changeStatus(status)
             .then(response => {
-                if(response.resultCode === 0){
+                if (response.resultCode === 0) {
                     dispatch(setCurrentProfileStatus(response.data));
                 }
-                
+
             })
     }
 }
+export const addNewPost = (text) => {
+    return (dispatch) => {
+        dispatch(newPost(text))
+        dispatch(reset('postForm'))
+    }
+
+}
+
+
+
 
 
 

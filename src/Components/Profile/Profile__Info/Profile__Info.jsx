@@ -1,7 +1,7 @@
 import React from 'react'
 import obj from './Profile__Info.module.css'
 import defaultAva from '../../../assets/images/default_photo.jpg'
-import StatusC from './Profile__Status_Class';
+import StatusC from './Profile__Status';
 
 const ProfileInfo = (props) => {
 

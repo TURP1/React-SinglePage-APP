@@ -1,45 +1,45 @@
 import React from 'react';
 import obj from './MyPosts.module.css'
 import Post from './Post/Post';
+import { Field, reduxForm } from 'redux-form'
+
+
+export let PostForm = props => {
+    
+    const { handleSubmit } = props
+
+    return <form onSubmit={handleSubmit}>{
+        <div>
+            <Field cols="50" rows="3" type="text" component="textarea" name="postText" className={obj.myPosts_textarea} />
+            <button type="submit">Submit</button>
+        </div>
+    }</form>
+}
+
+PostForm = reduxForm({
+    form: 'postForm'
+})(PostForm)
+
 
 const MyPosts = (props) => {
 
+
     const PostElement = props.postsData.map((post) => {
+
         return (
             <Post message={post.message} likeCount={post.likeCount} postImagesData={props.postImageData} />
         );
     });
 
-    let postsContentHtml = React.createRef();
-
-    const onAddPost = () => {
-        props.newPost();
-        clearInput();
-    };
-    const onChangeListener = () => {
-        let text = postsContentHtml.current.value;
-        props.updatePostText(text);
-    };
-
-    function clearInput() {
-        postsContentHtml.current.value = ``;
-    }
 
     return (
+
         <div className={obj.myPosts}>
             <div>
                 <div>
                     <h2>My posts</h2>
                 </div>
-                <div>
-                    <textarea cols="50" rows="3" className={obj.myPosts_textarea} ref={postsContentHtml}
-                        onFocus={clearInput}
-                        onChange={onChangeListener}
-                        value={props.newValue} />
-                </div>
-                <div>
-                    <button className={obj.myPosts__addPost_btn} onClick={onAddPost}> Submit</button>
-                </div>
+                <PostForm onSubmit={props.onSubmit} />
             </div>
 
             <div>

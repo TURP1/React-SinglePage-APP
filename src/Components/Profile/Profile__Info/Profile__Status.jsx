@@ -1,29 +1,54 @@
 import React from "react";
-import { useState } from "react";
+import { Component } from "react";
 import obj from "./Profile__Info.module.css"
-let Status = (props) => {
-    const [editMode, setEditMode] = useState(false)
+
+
+
+class StatusC extends Component {
     
-    let activateEditMode = () => {
-        
-        setEditMode(true)
- 
-    }
-    let deactivateEditMode = () => {
-        setEditMode(false)
+    state = {
+        editMode: false,
+        statusText: this.props.status
     }
 
+    onStatusChange = (e) => {
+        let newStatusValue = e.target.value;
+        this.setState({ statusText: newStatusValue });
+    }
+
+    activateEditMode = () => {
+            this.setState({ editMode: true })
+        
+        
+    }
+
+    deactivateEditMode = () => {
+        this.setState({ editMode: false })
+        this.props.changeStatus(this.state.statusText)
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if(prevProps.status !== this.props.status){
+            this.setState({statusText: this.props.status})
+        }
+        
+    }
+    
+
+    render() {
         return <div className={obj.profile__info_details_status}>
-            {!editMode
+            {!this.state.editMode
                 ? <div >
-                    <span onClick={activateEditMode}>{props.status}</span>
+                    <span onClick={this.activateEditMode}>{this.state.statusText ? this.state.statusText : "no status"}</span>
                 </div>
                 : < div >
-                    <input autoFocus onBlur={deactivateEditMode} type="text" />
+                    <input onChange={this.onStatusChange} autoFocus value={this.state.statusText} onBlur={this.deactivateEditMode} type="text" />
                 </div>
             }
         </div>
     }
 
+}
 
-export default Status
+
+export default StatusC

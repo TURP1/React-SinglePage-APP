@@ -1,5 +1,5 @@
 import React from 'react'
-import MyPosts from './Posts/MyPosts';
+import PostContainer from './Posts/MyPosts_Container';
 import obj from './Profile.module.css'
 import ProfileInfo from './Profile__Info/Profile__Info';
 
@@ -10,10 +10,8 @@ const Profile = (props) => {
             <ProfileInfo currentProfileInfo={props.currentProfileInfo}
                 status={props.status}
                 changeStatus={props.changeStatus} />
-            <MyPosts postsData={props.postsData}
-                updatePostText={props.updatePostText}
-                newPost={props.newPost}
-                newValue={props.newValue}
+            <PostContainer postsData={props.postsData}
+                addNewPost={props.addNewPost}
                 postImageData={props.postImageData}
             />
         </div>
