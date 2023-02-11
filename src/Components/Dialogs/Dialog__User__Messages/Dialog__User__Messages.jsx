@@ -2,13 +2,15 @@ import React from 'react';
 import obj from './Dialog__User__Messages.module.css'
 import DialogUserMessage from './Dialog__User__Messages_Message/Dialog__User__Messages-Message';
 import { Field, reduxForm } from 'redux-form'
+import { maxLength300, Textarea } from '../../common/FormControls/FormControls';
 
 
 export let MessageForm = props => {
   const { handleSubmit } = props
   return <form onSubmit={handleSubmit}>{
     <div>
-      <Field className={obj.dialog__user_messages_textarea} name="message" component="textarea" type="text" cols="50" rows="3"
+      <Field className={obj.dialog__user_messages_textarea} name="message" component={Textarea}
+       type="text" cols="50" rows="3" validate={maxLength300}
       />
       <button className={obj.dialog__user_messages_btn} type="submit" > Send</button>
     </div>

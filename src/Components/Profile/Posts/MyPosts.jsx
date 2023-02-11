@@ -2,15 +2,17 @@ import React from 'react';
 import obj from './MyPosts.module.css'
 import Post from './Post/Post';
 import { Field, reduxForm } from 'redux-form'
+import  { maxLength300, Textarea } from '../../common/FormControls/FormControls';
 
 
 export let PostForm = props => {
-    
+
     const { handleSubmit } = props
 
     return <form onSubmit={handleSubmit}>{
         <div>
-            <Field cols="50" rows="3" type="text" component="textarea" name="postText" className={obj.myPosts_textarea} />
+            <Field cols="50" rows="3" type="text" component={Textarea}
+                name="postText" className={obj.myPosts_textarea} validate={maxLength300} />
             <button type="submit">Submit</button>
         </div>
     }</form>
