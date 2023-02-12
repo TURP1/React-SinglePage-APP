@@ -5,7 +5,7 @@ import { Navigate } from "react-router-dom";
 
 let mapStateToProps = (state) => {
     return {
-        authMe: state.authReducer.authorized
+        authMe: state.authReducer.isAuth
     }
 }
 

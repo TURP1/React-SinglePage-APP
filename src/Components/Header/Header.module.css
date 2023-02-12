@@ -13,11 +13,17 @@
   float: right;
 }
 
-.header__profileName {
-  float: right;
-  padding: 10px;
+.header__item {
+  margin: 3px;
 }
 
 .header__avatar {
   float: right;
+}
+
+.header__profileName_logoutBtn_Container{
+  float: right;
+  padding-right: 10px;
+  display: flex;
+  flex-direction: column;
 }

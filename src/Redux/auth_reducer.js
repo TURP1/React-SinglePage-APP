@@ -9,7 +9,7 @@ let initialState = {
     id: null,
     email: null,
     login: null,
-    authorized: false,
+    isAuth: false,
     littleImage: null
 }
 const authReducer = (state = initialState, action) => {
@@ -18,7 +18,6 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 ...action.data,
-                authorized: true
             }
         }
 
@@ -34,7 +33,7 @@ const authReducer = (state = initialState, action) => {
     }
 };
 
-const setUserData = (id, email, login) => ({ type: SET_USER_DATA, data: { id, email, login } });
+const setUserData = (id, email, login, isAuth) => ({ type: SET_USER_DATA, data: { id, email, login, isAuth } });
 
 const setLittleImage = (littleImage) => ({ type: SET_LITTLE_IMAGE, littleImage });
 
@@ -44,7 +43,7 @@ export const getUserData = () => {
             .then(response => {
                 if (response.data.resultCode !== 1) {
                     let { id, email, login } = response.data.data;
-                    dispatch(setUserData(id, email, login));
+                    dispatch(setUserData(id, email, login, true));
                 };
             })
     }
@@ -62,9 +61,19 @@ export const loginMe = (email, password, rememberMe) => {
     return (dispatch) => {
         authAPI.loginMe(email, password, rememberMe)
             .then(response => {
-                response.data.resultCode === 0
-                    ? alert(`success`)
-                    : alert(response.data.messages)
+                if (response.data.resultCode === 0) 
+                {dispatch(getUserData())}
+                else alert(response.data.messages)
+            });
+    }
+};
+export const logout = () => {
+    return (dispatch) => {
+        authAPI.deleteMe()
+            .then(response => {
+                if (response.data.resultCode === 0) 
+                {  dispatch(setUserData(null, null, null, false))}
+                else alert(response.data.messages)
             });
     }
 };

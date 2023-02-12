@@ -10,6 +10,9 @@ import Profile from './Profile';
 class ProfileContainer extends React.Component {
     componentDidMount() {
         let userId = this.props.router.params.UserId;
+        if (!userId){
+            userId = 27493
+        }
         this.props.getUser(userId);
         this.props.getStatus(userId);
 
@@ -38,7 +41,7 @@ let mapStateToProps = (state) => {
         postsData: state.profilePage.postsData,
         postImageData: state.profilePage.postImagesData,
         currentProfileInfo: state.profilePage.currentProfileInfo,
-        authMe: state.authReducer.authorized,
+        authMe: state.authReducer.isAuth,
         status: state.profilePage.currentProfileStatus,
     }
 
