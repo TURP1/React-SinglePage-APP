@@ -4,10 +4,36 @@ import { Field, reduxForm } from 'redux-form';
 import { email, Input, maxLength15, minLength8, required } from "../common/FormControls/FormControls";
 import obj from "./Login.module.css"
 
+let Error = props => {
+    if (props.error) {
+        return <div className={obj.errorMessage}>
+            {props.error}
+        </div>
+    }
+
+}
+
+
+let Captcha = props => {
+    if (props.captcha) {
+        return <div>
+            <img src={props.captcha} alt="captcha" />
+            <div>
+                <Field component="input" type="text" name="captcha" />
+            </div>
+
+        </div>
+    }
+
+}
 
 let LoginForm = props => {
     const { handleSubmit } = props
+
     return <form className={obj.loginForm}
+
+
+
         onSubmit={handleSubmit}>{
             <>
 
@@ -22,8 +48,9 @@ let LoginForm = props => {
                 <label htmlFor="rememberMe">RememberMe</label>
                 <Field component="input" type="checkbox" name="rememberMe"
                     id="1" />
-
-                <button type="submit">Submit</button>
+                <Error error={props.isError}></Error>
+                <Captcha captcha={props.captcha} />
+                <button className={obj.submitBtn} type="submit">Submit</button>
             </>
 
         }</form>
@@ -42,9 +69,8 @@ export const Login = (props) => {
     return (
         <div className={obj.loginFormWrapper}>
             <h1>LOGIN</h1>
-            <LoginForm onSubmit={props.onSubmit} />
+            <LoginForm onSubmit={props.onSubmit} captcha={props.captcha} isError={props.error} />
         </div>
-
     )
 }
 
