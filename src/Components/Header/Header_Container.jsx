@@ -1,11 +1,11 @@
 import React from 'react';
 import Header from './Header'
-import { getUserData, getProfile, logout } from '../../Redux/auth_reducer';
+import {  getProfile, logout } from '../../Redux/auth_reducer';
 import { connect } from 'react-redux';
 
 class Header_Component extends React.Component {
   componentDidMount() {
-    this.props.getUserData();
+
     if (this.props.authorized) {
       this.props.getProfile(this.props.id);
     }
@@ -25,4 +25,4 @@ let mapStateToProps = (state) => {
     id: state.authReducer.id
   }
 }
-export default connect(mapStateToProps, { getUserData, getProfile, logout })(Header_Component);
+export default connect(mapStateToProps, { getProfile, logout })(Header_Component);
