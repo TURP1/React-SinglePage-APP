@@ -1,7 +1,8 @@
 import React from 'react'
 import obj from './Profile__Info.module.css'
 import defaultAva from '../../../assets/images/default_photo.jpg'
-import StatusC from './Profile__Status';
+import Status from './Profile__Status_WithHOOK';
+
 
 const ProfileInfo = (props) => {
 
@@ -19,10 +20,10 @@ const ProfileInfo = (props) => {
           <div className={obj.profile__info_details_name}>{props.currentProfileInfo.fullName}</div>
           <div>{props.currentProfileInfo.lookingForAJob ? `looking for a job` : `not looking`}</div>
         </div>
-        <StatusC aboutMe = {props.currentProfileInfo.aboutMe}
+        <Status 
         status = {props.status}
         changeStatus= {props.changeStatus}
-      ></StatusC>
+      ></Status>
         <div className={obj.profile__info_details_container_row}>
           <div>{props.currentProfileInfo.aboutMe}</div>
           <div>{props.currentProfileInfo.lookingForAJobDescription}</div>

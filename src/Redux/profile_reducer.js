@@ -110,8 +110,8 @@ export const changeStatus = (status) => {
     return (dispatch) => {
         profileAPI.changeStatus(status)
             .then(response => {
-                if (response.resultCode === 0) {
-                    dispatch(setCurrentProfileStatus(response.data));
+                if (response.data.resultCode === 0) {
+                    dispatch(setCurrentProfileStatus(status));
                 }
 
             })
