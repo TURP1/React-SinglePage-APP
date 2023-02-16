@@ -6,7 +6,7 @@ import Preloader from './Components/common/Preloader/Preloader';
 import DialogsContainer from './Components/Dialogs/Dialogs_Container';
 import FindUsersContainer from './Components/Find_Users/Find_Users_Container';
 import HeaderComponent from './Components/Header/Header_Container';
-import Login_Container from './Components/Login/Login_Container';
+import LoginContainer from './Components/Login/Login_Container';
 import Music from './Components/Music/Music';
 import NavbarContainer from './Components/Navbar/Navbar_Container';
 import News from './Components/News/News';
@@ -38,7 +38,7 @@ class App extends Component {
           <Route path='/music' element={<Music />} />
           <Route path='/settings' element={<Settings />} />
           <Route path='/findUsers' element={<FindUsersContainer />} />
-          <Route path='/login' element={<Login_Container />} />
+          <Route path='/login' element={<LoginContainer />} />
 
         </Routes>
       </div>

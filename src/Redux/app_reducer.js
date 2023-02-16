@@ -28,10 +28,10 @@ const initializingSuccess = () => ({ type: SET_INITIALIZING_SUCCESS });
 
 export const initializeApp = () => {
     return (dispatch) => {
-        let promice = dispatch(getUserData());
+        let authPromise = dispatch(getUserData());
         // let authPromice2 = dispatch(getUserData());
         // let authPromice3 = dispatch(getUserData());
-        promice
+        Promise.all([authPromise])
             .then(() => {
                 dispatch(initializingSuccess())
             })
