@@ -6,6 +6,7 @@ import {
 import React from "react";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
+import { getIsFetched, getIsFollowingFetched, getUserPage, getUsers, getUsersInOnePage, getUsersTotalCount } from "../../Redux/users_selectors";
 
 
 
@@ -41,12 +42,12 @@ class UsersContainer extends React.Component {
 
 let mapPropsToState = (state) => {
     return {
-        users: state.findUsersPage.users,
-        userPage: state.findUsersPage.userPageNumber,
-        usersInOnePage: state.findUsersPage.usersInOnePage,
-        usersTotalCount: state.findUsersPage.usersTotalCount,
-        isFetched: state.findUsersPage.isFetched,
-        isFollowingFetched: state.findUsersPage.isFollowingFetched
+        users: getUsers(state),
+        userPage: getUserPage(state),
+        usersInOnePage: getUsersInOnePage(state),
+        usersTotalCount: getUsersTotalCount(state),
+        isFetched: getIsFetched(state),
+        isFollowingFetched: getIsFollowingFetched(state)
     }
 };
 
