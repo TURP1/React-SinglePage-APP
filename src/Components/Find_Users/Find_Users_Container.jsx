@@ -6,7 +6,7 @@ import {
 import React from "react";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
-import { getIsFetched, getIsFollowingFetched, getUserPage, getUsers, getUsersInOnePage, getUsersTotalCount } from "../../Redux/users_selectors";
+import { getIsFetched, getIsFollowingFetched, getUserPage, getUsersFilter, getUsersInOnePage, getUsersTotalCount } from "../../Redux/users_selectors";
 
 
 
@@ -42,7 +42,7 @@ class UsersContainer extends React.Component {
 
 let mapPropsToState = (state) => {
     return {
-        users: getUsers(state),
+        users: getUsersFilter(state),
         userPage: getUserPage(state),
         usersInOnePage: getUsersInOnePage(state),
         usersTotalCount: getUsersTotalCount(state),
