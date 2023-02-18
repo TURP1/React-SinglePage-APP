@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 const Header_Component = (props) => {
 
   useEffect(()=>{
-    alert(`UE Header`)
     if (props.authorized) {
       props.getProfile(props.id);
     }
