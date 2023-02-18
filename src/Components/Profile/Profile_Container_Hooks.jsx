@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import withAuthNavigate from '../../HOC/withAuthNavigateHOC';
@@ -7,31 +7,28 @@ import {  addNewPost, getUser, getStatus, changeStatus } from '../../Redux/profi
 import Profile from './Profile';
 
 
-class ProfileContainer extends React.Component {
-    componentDidMount() {
-        let userId = this.props.router.params.UserId;
+const ProfileContainer = (props)=> {
+
+    useEffect(()=>{
+        let userId = props.router.params.UserId;
         if (!userId){
-            userId = this.props.authorizedId
+            userId = props.authorizedId
         }
-        this.props.getUser(userId);
-        this.props.getStatus(userId);
+        props.getUser(userId);
+        props.getStatus(userId);
+    },[props.router.params.UserId])
 
-
-
-    }
-    render() {
 
         return <Profile
-            postsData={this.props.postsData}
-            postImageData={this.props.postImageData}
-            currentProfileInfo={this.props.currentProfileInfo}
-            updatePostText={this.props.updatePostText}
-            addNewPost={this.props.addNewPost}
-            status={this.props.status}
-            changeStatus={this.props.changeStatus}
+            postsData={props.postsData}
+            postImageData={props.postImageData}
+            currentProfileInfo={props.currentProfileInfo}
+            updatePostText={props.updatePostText}
+            addNewPost={props.addNewPost}
+            status={props.status}
+            changeStatus={props.changeStatus}
 
         />
-    }
 
 };
 

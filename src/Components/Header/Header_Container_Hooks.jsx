@@ -1,20 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from './Header'
-import {  getProfile, logout } from '../../Redux/auth_reducer';
+import { getProfile, logout } from '../../Redux/auth_reducer';
 import { connect } from 'react-redux';
 
-class Header_Component extends React.Component {
-  componentDidMount() {
+const Header_Component = (props) => {
 
-    if (this.props.authorized) {
-      this.props.getProfile(this.props.id);
+  useEffect(()=>{
+    alert(`UE Header`)
+    if (props.authorized) {
+      props.getProfile(props.id);
     }
-  };
+  },[props])
+ 
 
-    render() {
-      return <Header {...this.props} />
-    };
-  };
+
+  return <Header {...props} />
+};
+
 
 
 let mapStateToProps = (state) => {

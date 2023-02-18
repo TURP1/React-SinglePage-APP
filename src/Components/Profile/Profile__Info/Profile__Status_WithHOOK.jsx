@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import obj from "./Profile__Info.module.css"
 
 
@@ -6,6 +6,10 @@ import obj from "./Profile__Info.module.css"
 const Status = (props) => {
     let [editMode, setEditMode] = useState(false);
     let [status, setStatus] = useState(props.status)
+
+    useEffect(()=>{
+        setStatus(props.status)
+    },[props.status])
 
     const changeEditMode = () => {
         if (editMode) {
@@ -15,7 +19,6 @@ const Status = (props) => {
         else {
             setEditMode(true)
         }
-
     }
 
     const onStatusChange = (e) => {

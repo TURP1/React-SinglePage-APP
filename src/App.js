@@ -4,13 +4,13 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Preloader from './Components/common/Preloader/Preloader';
 import DialogsContainer from './Components/Dialogs/Dialogs_Container';
-import FindUsersContainer from './Components/Find_Users/Find_Users_Container';
-import HeaderComponent from './Components/Header/Header_Container';
+import FindUsersContainerWithHooks from './Components/Find_Users/Find_Users_Container_Hooks';
+import HeaderComponent from './Components/Header/Header_Container_Hooks';
 import LoginContainer from './Components/Login/Login_Container';
 import Music from './Components/Music/Music';
 import NavbarContainer from './Components/Navbar/Navbar_Container';
 import News from './Components/News/News';
-import ProfileContainer from './Components/Profile/Profile_Container';
+import ProfileContainer from './Components/Profile/Profile_Container_Hooks';
 import Settings from './Components/Settings/Settings';
 
 import { initializeApp } from './Redux/app_reducer'
@@ -37,7 +37,7 @@ class App extends Component {
           <Route path='/news' element={<News />} />
           <Route path='/music' element={<Music />} />
           <Route path='/settings' element={<Settings />} />
-          <Route path='/findUsers' element={<FindUsersContainer />} />
+          <Route path='/findUsers' element={<FindUsersContainerWithHooks />} />
           <Route path='/login' element={<LoginContainer />} />
 
         </Routes>
