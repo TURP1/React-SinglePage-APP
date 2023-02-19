@@ -4,7 +4,8 @@ import { profileAPI } from "../API/api";
 
 const NEW_POST = "NEW-POST";
 const SET_CURRENT_PROFILE_REDUCER = "SET_CURRENT_PROFILE_REDUCER";
-const SET_CURRENT_PROFILE_STATUS = "SET_CURRENT_PROFILE_STATUS"
+const SET_CURRENT_PROFILE_STATUS = "SET_CURRENT_PROFILE_STATUS";
+const DELETE_POST = "DELETE_POST";
 
 let initialState = {
     postsData: [
@@ -52,6 +53,12 @@ const profileReducer = (state = initialState, action) => {
                     newPostInfo]
             }
         }
+        case DELETE_POST: {
+            return {
+                ...state,
+                postsData: state.postsData.filter(p => p.id !== action.postId)
+            }
+        }
 
         case SET_CURRENT_PROFILE_REDUCER: {
             return {
@@ -76,13 +83,17 @@ const profileReducer = (state = initialState, action) => {
                 currentProfileStatus: action.status
             }
         }
+
         default:
             return state;
     }
 };
 
-const newPost = (text) => (
+export const newPost = (text) => (
     { type: NEW_POST, newText: text });
+
+export const deletePost = (postId) => (
+    { type: DELETE_POST, postId });
 
 const setCurrentProfileInfo = (profile) => (
     { type: SET_CURRENT_PROFILE_REDUCER, profile });
