@@ -12,11 +12,13 @@ import { getIsFetched, getIsFollowingFetched, getUserPage, getUsersFilter, getUs
 
 const UsersContainer = (props) => {
 
+    let { getUsersThunkActionCreator, userPage, usersInOnePage } = props;
+
     useEffect(() => {
-        props.getUsersThunkActionCreator(props.userPage, props.usersInOnePage)
-    }, [props.userPage, props.usersInOnePage]);
-    
-   let onPageChanged = (changedPage) => {
+        getUsersThunkActionCreator(userPage, usersInOnePage)
+    }, [userPage, usersInOnePage, getUsersThunkActionCreator]);
+
+    let onPageChanged = (changedPage) => {
         if (changedPage !== props.userPage) {
             props.setUserPage(changedPage);
             props.getUsersThunkActionCreator(changedPage, props.usersInOnePage);

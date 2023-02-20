@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Component, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
@@ -15,37 +15,38 @@ import Settings from './Components/Settings/Settings';
 
 import { initializeApp } from './Redux/app_reducer'
 
-class App extends Component {
+let App = (props) => {
+  useEffect(()=>{
+    alert(
+      `AppEff`
+    )
+    props.initializeApp();
+  },[props.initializeApp])
+  
 
-  componentDidMount() {
-    this.props.initializeApp();
-
-  };
-
-  render() {
-    if (!this.props.initialized) {
-      return <Preloader />
-    }
-    return <div className="app-wrapper">
-      <HeaderComponent />
-      <NavbarContainer />
-
-      <div className='app-wrapper__content'>
-        <Routes>
-          <Route path='/profile/:UserId' element={<ProfileContainer />} />
-          <Route path='/dialogs/*' element={<DialogsContainer />} />
-          <Route path='/news' element={<News />} />
-          <Route path='/music' element={<Music />} />
-          <Route path='/settings' element={<Settings />} />
-          <Route path='/findUsers' element={<FindUsersContainerWithHooks />} />
-          <Route path='/login' element={<LoginContainer />} />
-
-        </Routes>
-      </div>
-    </div>
+  if (!props.initialized) {
+    return <Preloader />
   }
+  return <div className="app-wrapper">
+    <HeaderComponent />
+    <NavbarContainer />
 
+    <div className='app-wrapper__content'>
+      <Routes>
+        <Route path='/profile/:UserId' element={<ProfileContainer />} />
+        <Route path='/dialogs/*' element={<DialogsContainer />} />
+        <Route path='/news' element={<News />} />
+        <Route path='/music' element={<Music />} />
+        <Route path='/settings' element={<Settings />} />
+        <Route path='/findUsers' element={<FindUsersContainerWithHooks />} />
+        <Route path='/login' element={<LoginContainer />} />
+
+      </Routes>
+    </div>
+  </div>
 }
+
+
 
 let mapDispatchToProps = (state) => ({
   initialized: state.app.initialized

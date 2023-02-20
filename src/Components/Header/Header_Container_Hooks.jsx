@@ -5,12 +5,14 @@ import { connect } from 'react-redux';
 
 const Header_Component = (props) => {
 
-  useEffect(()=>{
-    if (props.authorized) {
-      props.getProfile(props.id);
+  let { authorized, id, getProfile } = props;
+  useEffect(() => {
+    alert(`HookHeader`)
+    if (authorized) {
+      getProfile(id);
     }
-  },[props])
- 
+  }, [authorized, id, getProfile])
+
 
 
   return <Header {...props} />

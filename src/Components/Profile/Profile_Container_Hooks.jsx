@@ -3,34 +3,34 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import withAuthNavigate from '../../HOC/withAuthNavigateHOC';
 import withRouter from '../../HOC/withRouterHOC';
-import {  addNewPost, getUser, getStatus, changeStatus } from '../../Redux/profile_reducer';
+import { addNewPost, getUser, getStatus, changeStatus } from '../../Redux/profile_reducer';
 import Profile from './Profile';
 
 
-const ProfileContainer = (props)=> {
+const ProfileContainer = (props) => {
+    let { getUser, getStatus, authorizedId } = props
     let userId = props.router.params.UserId;
-    if (!userId){
-        userId = props.authorizedId
+
+    if (!userId) {
+        userId = authorizedId
     };
-    const getUserFunc = props.getUser;
-    const getStatusFunc = props.getStatus;
 
-    useEffect(()=>{
-        getUserFunc(userId);
-        getStatusFunc(userId);
-    },[userId, getUserFunc, getStatusFunc])
+    useEffect(() => {
+        getUser(userId);
+        getStatus(userId);
+    }, [userId, getUser, getStatus])
 
 
-        return <Profile
-            postsData={props.postsData}
-            postImageData={props.postImageData}
-            currentProfileInfo={props.currentProfileInfo}
-            updatePostText={props.updatePostText}
-            addNewPost={props.addNewPost}
-            status={props.status}
-            changeStatus={props.changeStatus}
+    return <Profile
+        postsData={props.postsData}
+        postImageData={props.postImageData}
+        currentProfileInfo={props.currentProfileInfo}
+        updatePostText={props.updatePostText}
+        addNewPost={props.addNewPost}
+        status={props.status}
+        changeStatus={props.changeStatus}
 
-        />
+    />
 
 };
 
@@ -42,7 +42,7 @@ let mapStateToProps = (state) => {
         currentProfileInfo: state.profilePage.currentProfileInfo,
         authMe: state.authReducer.isAuth,
         status: state.profilePage.currentProfileStatus,
-        authorizedId : state.authReducer.id
+        authorizedId: state.authReducer.id
     }
 
 };
