@@ -17,9 +17,6 @@ import { initializeApp } from './Redux/app_reducer'
 
 let App = (props) => {
   useEffect(()=>{
-    alert(
-      `AppEff`
-    )
     props.initializeApp();
   },[props.initializeApp])
   

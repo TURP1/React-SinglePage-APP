@@ -99,7 +99,6 @@ export const loginMe = (email, password, rememberMe, captcha) => {
                     error10Count = 0;
                 }
                 else if (response.data.resultCode === 10) {
-                    alert(`Capcha`)
                     if (error10Count < 1) {
                         dispatch(setErrorMessage("Add Captcha"))
                         error10Count++;

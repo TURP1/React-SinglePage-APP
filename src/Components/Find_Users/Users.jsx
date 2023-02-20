@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import defaultPhoto from '../../assets/images/default_photo.jpg';
 import obj from './Find_Users.module.css';
+import Paginator from "./Paginator/Paginator";
 
 
 const Users = (props) => {
@@ -21,7 +22,7 @@ const Users = (props) => {
                             }}>Unfollow</button>
                             : <button disabled={props.isFollowingFetched.some(id => id === u.id)} onClick={() => {
                                 props.follow(u.id)
-                                }} >Follow</button>} </div>
+                            }} >Follow</button>} </div>
                 </div>
                 <div className={obj.findUsers_info_container}>
                     <div className={obj.findUsers_info_fullname_status}>
@@ -42,25 +43,17 @@ const Users = (props) => {
         )
     })
 
-    let pagesCount = Math.ceil(props.usersTotalCount / props.usersInOnePage)
-    let pages = [];
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i)
-    }
+
 
     return (
 
         <div className={obj.findUsers_container}>
-            <div className={obj.findUsers_pageNumber}>
-                {pages.map((page) => {
-                    return <span
-                        onClick={(e) => { props.onPageChanged(page) }}
-                        className={page === props.userPage ? obj.checkedPage : undefined}>{page}</span>
-                })}
-                
-            </div>
+            <Paginator usersTotalCount={props.usersTotalCount} usersInOnePage={props.usersInOnePage}
+             onPageChanged={props.onPageChanged} userPage={props.userPage}/>
             {mapUser}
         </div>
     )
 }
+
+
 export default Users

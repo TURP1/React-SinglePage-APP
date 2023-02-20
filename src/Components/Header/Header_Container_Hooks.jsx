@@ -7,7 +7,6 @@ const Header_Component = (props) => {
 
   let { authorized, id, getProfile } = props;
   useEffect(() => {
-    alert(`HookHeader`)
     if (authorized) {
       getProfile(id);
     }
