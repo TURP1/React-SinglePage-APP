@@ -8,9 +8,6 @@ const SET_TOTAL_COUNT = "SET_TOTAL_COUNT";
 const SET_FETCHING = "SET_FETCHING";
 const SET_FOLLOWING_FETCH = "SET_FOLLOWING_FETCH";
 
-
-
-
 let initialState = {
     users: [
     ],
@@ -72,64 +69,47 @@ const findUserReducer = (state = initialState, action) => {
     }
 };
 
-
-
 export const userFollow = (userID) => ({ type: USER_FOLLOW, id: userID });
-
 export const userUnFollow = (userID) => ({ type: USER_UNFOLLOW, id: userID });
-
 export const setUserPage = (userPage) => ({ type: SET_USER_PAGE, userPage });
 
 const setUsers = (users) => ({ type: SET_USER, users });
-
 const setTotalCount = (usersTotalCount) => ({ type: SET_TOTAL_COUNT, usersTotalCount });
-
 const setFetch = (isFetched) => ({ type: SET_FETCHING, isFetched });
-
 const setFollowingFetch = (isFetched, id) => ({ type: SET_FOLLOWING_FETCH, isFetched, id });
 
 export const getUsersThunkActionCreator = (userPage, usersInOnePage) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(setFetch(true));
-        usersAPI.getUsers(userPage, usersInOnePage)
-            .then(data => {
-                dispatch(setFetch(false));
-                dispatch(setUsers(data.items));
-                dispatch(setTotalCount(data.totalCount));
-            }
-            )
+        let data = await usersAPI.getUsers(userPage, usersInOnePage)
+
+        dispatch(setFetch(false));
+        dispatch(setUsers(data.items));
+        dispatch(setTotalCount(data.totalCount));
+
     }
 };
 
 export const followThunkAC = (id) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(setFollowingFetch(true, id));
-        usersAPI.follow(id)
-            .then(() => {
-                dispatch(userFollow(id));
-                dispatch(setFollowingFetch(false, id));
-            }
-            )
+        await usersAPI.follow(id)
+
+        dispatch(userFollow(id));
+        dispatch(setFollowingFetch(false, id));
+
     }
 };
 export const unFollowThunkAC = (id) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(setFollowingFetch(true, id));
-        usersAPI.unFollow(id)
-            .then(() => {
-                dispatch(userUnFollow(id));
-                dispatch(setFollowingFetch(false, id));
-            }
-            )
+        await usersAPI.unFollow(id)
+
+        dispatch(userUnFollow(id));
+        dispatch(setFollowingFetch(false, id));
+
     }
 };
-
-
-
-
-
-
-
 
 
 

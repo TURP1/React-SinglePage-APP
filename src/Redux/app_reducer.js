@@ -17,7 +17,6 @@ const appReducer = (state = initialState, action) => {
             }
         }
 
-
         default:
             return state;
     }
@@ -27,14 +26,15 @@ const initializingSuccess = () => ({ type: SET_INITIALIZING_SUCCESS });
 
 
 export const initializeApp = () => {
-    return (dispatch) => {
+    return async(dispatch) => {
         let authPromise = dispatch(getUserData());
-        // let authPromice2 = dispatch(getUserData());
-        // let authPromice3 = dispatch(getUserData());
-        Promise.all([authPromise])
-            .then(() => {
+        // let authPromise2 = dispatch(getUserData());
+        // let authPromise3 = dispatch(getUserData());
+
+        //Promise.all - when all dispatches will finish, await for promise
+        await Promise.all([authPromise])
                 dispatch(initializingSuccess())
-            })
+
 
     }
 };

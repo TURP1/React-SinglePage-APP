@@ -8,15 +8,17 @@ import Profile from './Profile';
 
 
 const ProfileContainer = (props)=> {
+    let userId = props.router.params.UserId;
+    if (!userId){
+        userId = props.authorizedId
+    };
+    const getUserFunc = props.getUser;
+    const getStatusFunc = props.getStatus;
 
     useEffect(()=>{
-        let userId = props.router.params.UserId;
-        if (!userId){
-            userId = props.authorizedId
-        }
-        props.getUser(userId);
-        props.getStatus(userId);
-    },[props.router.params.UserId])
+        getUserFunc(userId);
+        getStatusFunc(userId);
+    },[userId, getUserFunc, getStatusFunc])
 
 
         return <Profile

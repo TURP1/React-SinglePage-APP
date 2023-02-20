@@ -71,30 +71,27 @@ const setErrorMessage = (errorMessage) => ({ type: SET_ERROR, errorMessage })
 
 
 export const getUserData = () => {
-    return (dispatch) => {
-        return authAPI.authMe()
-            .then(response => {
-                if (response.data.resultCode !== 1) {
-                    let { id, email, login } = response.data.data;
-                    dispatch(setUserData(id, email, login));
-                    dispatch(setAuth(true))
-                };
-            })
+    return async (dispatch) => {
+        let response = await authAPI.authMe()
+        if (response.data.resultCode !== 1) {
+            let { id, email, login } = response.data.data;
+            dispatch(setUserData(id, email, login));
+            dispatch(setAuth(true))
+        };
+
     };
 }
 export const getProfile = (id) => {
-    return (dispatch) => {
-        profileAPI.getProfile(id)
-            .then(response => {
-                dispatch(setLittleImage(response.data.photos.small));
-            })
+    return async (dispatch) => {
+        let response = await profileAPI.getProfile(id)
+        dispatch(setLittleImage(response.data.photos.small));
+
     };
 }
 
 export const loginMe = (email, password, rememberMe, captcha) => {
-    return (dispatch) => {
-        authAPI.loginMe(email, password, rememberMe, captcha)
-            .then(response => {
+    return async (dispatch) => {
+        let response = await authAPI.loginMe(email, password, rememberMe, captcha)
                 if (response.data.resultCode === 0) {
                     dispatch(getUserData());
                     dispatch(setCaptcha(null));
@@ -115,35 +112,25 @@ export const loginMe = (email, password, rememberMe, captcha) => {
 
                 }
                 else dispatch(setErrorMessage(response.data.messages[0]))
-            });
     };
 };
 
 export const logout = () => {
-    return (dispatch) => {
-        authAPI.deleteMe()
-            .then(response => {
+    return async(dispatch) => {
+       let response = await authAPI.deleteMe()
                 if (response.data.resultCode === 0) {
                     dispatch(setUserData(null, null, null))
                     dispatch(setAuth(false))
                 }
                 else alert(response.data.messages)
-            });
     };
 };
 
 export const getCaptcha = () => {
-    return (dispatch) => {
-        securityApi.getCaptcha()
-            .then(response => {
+    return async(dispatch) => {
+        let response = await securityApi.getCaptcha()
                 dispatch(setCaptcha(response.data.url))
-            });
     };
 };
-
-
-
-
-
 
 export default authReducer;
