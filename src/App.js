@@ -1,6 +1,6 @@
-import { Component, useEffect } from 'react';
-import { connect } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
+import { useEffect } from 'react';
+import { connect, Provider } from 'react-redux';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Preloader from './Components/common/Preloader/Preloader';
 import DialogsContainer from './Components/Dialogs/Dialogs_Container';
@@ -14,12 +14,13 @@ import ProfileContainer from './Components/Profile/Profile_Container_Hooks';
 import Settings from './Components/Settings/Settings';
 
 import { initializeApp } from './Redux/app_reducer'
+import store from './Redux/redux_store';
 
 let App = (props) => {
-  useEffect(()=>{
+  useEffect(() => {
     props.initializeApp();
-  },[props.initializeApp])
-  
+  }, [props.initializeApp])
+
 
   if (!props.initialized) {
     return <Preloader />
@@ -49,5 +50,17 @@ let mapDispatchToProps = (state) => ({
   initialized: state.app.initialized
 })
 
+const AppContainer = connect(mapDispatchToProps, { initializeApp })(App);
 
-export default connect(mapDispatchToProps, { initializeApp })(App);
+
+const NetworkApp = () => {
+  return (
+    <BrowserRouter>
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
+    </BrowserRouter>
+  )
+}
+
+export default NetworkApp
