@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import defaultPhoto from '../../assets/images/default_photo.jpg';
 import obj from './Find_Users.module.css';
-import Paginator from "./Paginator/Paginator";
+import Paginator from "./Paginator/FindUsers_Paginator";
 
 
 const Users = (props) => {

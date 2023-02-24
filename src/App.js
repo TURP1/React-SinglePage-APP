@@ -17,9 +17,12 @@ import { initializeApp } from './Redux/app_reducer'
 import store from './Redux/redux_store';
 
 let App = (props) => {
+
+  let initializeApp = props.initializeApp;
+
   useEffect(() => {
-    props.initializeApp();
-  }, [props.initializeApp])
+    initializeApp();
+  }, [initializeApp])
 
 
   if (!props.initialized) {
