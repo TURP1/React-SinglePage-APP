@@ -37,7 +37,7 @@ let App = (props) => {
         <Route path='/dialogs/*' element={<DialogsContainer />} />
         <Route path='/news' element={<News />} />
         <Route path='/music' element={
-          <Suspense>
+          <Suspense fallback={<Preloader/>}>
             <Music />
           </Suspense>
         } />
