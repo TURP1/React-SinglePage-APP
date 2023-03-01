@@ -61,7 +61,7 @@ const AppContainer = connect(mapDispatchToProps, { initializeApp })(App);
 
 const NetworkApp = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename ="/">
       <Provider store={store}>
         <AppContainer />
       </Provider>
