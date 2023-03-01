@@ -1,6 +1,6 @@
 import React, { Suspense, useEffect } from 'react';
 import { connect, Provider } from 'react-redux';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Preloader from './Components/common/Preloader/Preloader';
 import DialogsContainer from './Components/Dialogs/Dialogs_Container';
@@ -37,7 +37,7 @@ let App = (props) => {
         <Route path='/dialogs/*' element={<DialogsContainer />} />
         <Route path='/news' element={<News />} />
         <Route path='/music' element={
-          <Suspense fallback={<Preloader/>}>
+          <Suspense fallback={<Preloader />}>
             <Music />
           </Suspense>
         } />
@@ -61,11 +61,11 @@ const AppContainer = connect(mapDispatchToProps, { initializeApp })(App);
 
 const NetworkApp = () => {
   return (
-    <BrowserRouter basename ="/">
+    <HashRouter>
       <Provider store={store}>
         <AppContainer />
       </Provider>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
