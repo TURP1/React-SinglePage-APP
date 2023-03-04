@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import withAuthNavigate from '../../HOC/withAuthNavigateHOC';
 import withRouter from '../../HOC/withRouterHOC';
-import { addNewPost, getUser, getStatus, changeStatus } from '../../Redux/profile_reducer';
+import { addNewPost, getUser, getStatus, changeStatus, changePicture } from '../../Redux/profile_reducer';
 import Profile from './Profile';
 
 
@@ -29,6 +29,7 @@ const ProfileContainer = (props) => {
         addNewPost={props.addNewPost}
         status={props.status}
         changeStatus={props.changeStatus}
+        changePicture={props.changePicture}
 
     />
 
@@ -49,7 +50,7 @@ let mapStateToProps = (state) => {
 
 
 export default compose(
-    connect(mapStateToProps, { addNewPost, getUser, getStatus, changeStatus }),
+    connect(mapStateToProps, { addNewPost, getUser, getStatus, changeStatus, changePicture }),
     withRouter,
     withAuthNavigate
 )(ProfileContainer)

@@ -1,20 +1,17 @@
 import React from 'react'
 import obj from './Profile__Info.module.css'
-import defaultAva from '../../../assets/images/default_photo.jpg'
+
 import Status from './Profile__Status_WithHOOK';
+import ProfileAva from './Profile_Ava';
 
 
-const ProfileInfo = ({ currentProfileInfo, ...props }) => {
+const ProfileInfo = ({ currentProfileInfo, changePicture, ...props }) => {
 
 
 
   return (
     <div className={obj.profile__info_container}>
-      <div className={obj.profile__info_avatar}>
-        <img alt="avatar" src={currentProfileInfo.photos.large
-          ? currentProfileInfo.photos.large
-          : defaultAva} />
-      </div>
+      <ProfileAva currentProfileInfo={currentProfileInfo} changePicture={changePicture} />
       <div className={obj.profile__info_details_container}>
         <div className={obj.profile__info_details_container_row}>
           <div className={obj.profile__info_details_name}>{currentProfileInfo.fullName}</div>

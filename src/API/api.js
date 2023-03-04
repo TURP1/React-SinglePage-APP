@@ -30,7 +30,7 @@ export const authAPI = {
         return instance.post(`auth/login`,
             { email, password, rememberMe, captcha })
     },
-    deleteMe(){
+    deleteMe() {
         return instance.delete(`auth/login`)
     }
 }
@@ -44,12 +44,22 @@ export const profileAPI = {
     },
     changeStatus(status) {
         return instance.put(`profile/status`, { status: status })
+    },
+    changePicture(photo) {
+        const formData = new FormData();
+        formData.append("image", photo);
+        instance.put(`profile/photo`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
     }
+
 
 }
 
 export const securityApi = {
-    getCaptcha(){
+    getCaptcha() {
         return instance.get(`security/get-captcha-url`)
     }
 }
