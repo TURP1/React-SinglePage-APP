@@ -12,19 +12,17 @@ const Header_Component = (props) => {
     }
   }, [authorized, id, getProfile])
 
-
-
   return <Header {...props} />
 };
-
 
 
 let mapStateToProps = (state) => {
   return {
     authorized: state.authReducer.isAuth,
     email: state.authReducer.email,
-    littleImage: state.authReducer.littleImage,
-    id: state.authReducer.id
+    littleImage: state.profilePage.currentProfileInfo.photos.small,
+    authorizedId: state.authReducer.id,
+    currentProfileId : state.profilePage.currentProfileInfo.userId
   }
 }
 export default connect(mapStateToProps, { getProfile, logout })(Header_Component);

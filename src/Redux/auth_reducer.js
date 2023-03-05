@@ -83,7 +83,7 @@ export const getUserData = () => {
 }
 export const getProfile = (id) => {
     return async (dispatch) => {
-        let response = await profileAPI.getProfile(id)
+        let response = await profileAPI.getProfile(id);
         dispatch(setLittleImage(response.data.photos.small));
 
     };

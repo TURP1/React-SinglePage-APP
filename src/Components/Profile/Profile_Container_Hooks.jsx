@@ -4,6 +4,7 @@ import { compose } from 'redux';
 import withAuthNavigate from '../../HOC/withAuthNavigateHOC';
 import withRouter from '../../HOC/withRouterHOC';
 import { addNewPost, getUser, getStatus, changeStatus, changePicture } from '../../Redux/profile_reducer';
+
 import Profile from './Profile';
 
 
