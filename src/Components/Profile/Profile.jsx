@@ -10,7 +10,8 @@ const Profile = (props) => {
             <ProfileInfo currentProfileInfo={props.currentProfileInfo}
                 status={props.status}
                 changeStatus={props.changeStatus}
-                changePicture={props.changePicture} />
+                changePicture={props.changePicture}
+                isOwner={props.isOwner} />
             <PostContainer postsData={props.postsData}
                 addNewPost={props.addNewPost}
                 postImageData={props.postImageData}

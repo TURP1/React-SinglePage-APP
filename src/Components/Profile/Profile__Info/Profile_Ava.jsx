@@ -24,7 +24,7 @@ const ProfileAva = (props) => {
 
     return <div className={obj.profile__info_avatar}>
         <img alt="avatar" src={avatar ? avatar : defaultAva} />
-        <input type="file" onChange={onchangeHandler} />
+        {props.isOwner && <input type="file" onChange={onchangeHandler} />}
     </div>
 }
 

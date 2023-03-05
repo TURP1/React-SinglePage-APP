@@ -11,7 +11,7 @@ const ProfileInfo = ({ currentProfileInfo, changePicture, ...props }) => {
 
   return (
     <div className={obj.profile__info_container}>
-      <ProfileAva currentProfileInfo={currentProfileInfo} changePicture={changePicture} />
+      <ProfileAva currentProfileInfo={currentProfileInfo} changePicture={changePicture} isOwner={props.isOwner}/>
       <div className={obj.profile__info_details_container}>
         <div className={obj.profile__info_details_container_row}>
           <div className={obj.profile__info_details_name}>{currentProfileInfo.fullName}</div>
