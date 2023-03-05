@@ -144,15 +144,17 @@ export const changeStatus = (status) => {
             dispatch(setCurrentProfileStatus(status));
         }
     }
-}
+} 
+
 export const changePicture = (photo) => {
     return async (dispatch) => {
         let response = await profileAPI.changePicture(photo)
-        if (response.resultCode === 0) {
-            dispatch(setNewImageSuccess(photo));
+        if (response && response.data.resultCode === 0) {
+            dispatch(setNewImageSuccess(response.data.data.photos.large));
         }
     }
 }
+
 
 export const addNewPost = (text) => {
     return (dispatch) => {

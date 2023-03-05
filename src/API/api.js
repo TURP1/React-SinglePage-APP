@@ -48,11 +48,12 @@ export const profileAPI = {
     changePicture(photo) {
         const formData = new FormData();
         formData.append("image", photo);
-        instance.put(`profile/photo`, formData, {
+        return instance.put(`profile/photo`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
-        })
+        });
+        
     }
 
 
