@@ -13,9 +13,19 @@ import ProfileContainer from './Components/Profile/Profile_Container_Hooks';
 import Settings from './Components/Settings/Settings';
 import { initializeApp } from './Redux/app_reducer'
 import store from './Redux/redux_store';
+import { getProfile } from '../src/Redux/auth_reducer';
+
 const Music = React.lazy(() => import('./Components/Music/Music'));
 
 let App = (props) => {
+
+  let { authorized, authorizedId, getProfile } = props;
+  useEffect(() => {
+    if (authorized) {
+      getProfile(authorizedId);
+    }
+  }, [authorized, authorizedId, getProfile]);
+
 
   let initializeApp = props.initializeApp;
 
@@ -53,10 +63,13 @@ let App = (props) => {
 
 
 let mapDispatchToProps = (state) => ({
-  initialized: state.app.initialized
+  initialized: state.app.initialized,
+  authorized: state.authReducer.isAuth,
+  authorizedId: state.authReducer.id,
+  currentProfileId: state.profilePage.currentProfileInfo.userId
 })
 
-const AppContainer = connect(mapDispatchToProps, { initializeApp })(App);
+const AppContainer = connect(mapDispatchToProps, { initializeApp, getProfile })(App);
 
 
 const NetworkApp = () => {

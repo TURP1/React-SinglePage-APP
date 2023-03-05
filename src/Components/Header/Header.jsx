@@ -12,7 +12,7 @@ const Header = ({ authorized, littleImage, email, logout, authorizedId, currentP
 
   useEffect(() => {
     isOwner && setLittleAvatar(littleImage)
-  }, [littleImage])
+  }, [littleImage, isOwner])
 
   return (
     <header className={obj.header}>

@@ -10,8 +10,8 @@ import Profile from './Profile';
 
 const ProfileContainer = (props) => {
     let { getUser, getStatus, authorizedId } = props;
-    let userId = props.router.params.UserId;
-    let isOwner = (userId == authorizedId)
+    let userId = +props.router.params.UserId;
+    let isOwner = (userId === authorizedId)
     if (!userId) {
         userId = authorizedId
     };

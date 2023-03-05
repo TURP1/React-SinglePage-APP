@@ -1,16 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Header from './Header'
 import { getProfile, logout } from '../../Redux/auth_reducer';
 import { connect } from 'react-redux';
 
 const Header_Component = (props) => {
-
-  let { authorized, authorizedId, getProfile } = props;
-  useEffect(() => {
-    if (authorized) {
-      getProfile(authorizedId);
-    }
-  }, [authorized, authorizedId, getProfile]);
  
   return <Header {...props} />
 };
