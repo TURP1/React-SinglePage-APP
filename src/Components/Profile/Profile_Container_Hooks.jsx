@@ -11,7 +11,6 @@ import Profile from './Profile';
 const ProfileContainer = (props) => {
     let { getUser, getStatus, authorizedId } = props;
     let userId = props.router.params.UserId;
-    debugger
     let isOwner = (userId == authorizedId)
     if (!userId) {
         userId = authorizedId
