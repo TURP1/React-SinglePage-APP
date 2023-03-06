@@ -14,8 +14,8 @@ import Settings from './Components/Settings/Settings';
 import { initializeApp } from './Redux/app_reducer'
 import store from './Redux/redux_store';
 import { getProfile } from '../src/Redux/auth_reducer';
-
 const Music = React.lazy(() => import('./Components/Music/Music'));
+
 
 let App = (props) => {
 
@@ -26,12 +26,10 @@ let App = (props) => {
     }
   }, [authorized, authorizedId, getProfile]);
 
-
   let initializeApp = props.initializeApp;
-
   useEffect(() => {
     initializeApp();
-  }, [initializeApp])
+  }, [initializeApp]);
 
 
   if (!props.initialized) {
@@ -59,8 +57,6 @@ let App = (props) => {
     </div>
   </div>
 }
-
-
 
 let mapDispatchToProps = (state) => ({
   initialized: state.app.initialized,

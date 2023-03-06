@@ -11,6 +11,7 @@ const Dialogs = (props) => {
 
   const DialogsElement = props.dialogsPageData.users.map(user => (< DialogUser
     id={user.id}
+    key={user.id}
     userName={user.name}
     logo={user.logo}
     className={obj.dialog__user} />));

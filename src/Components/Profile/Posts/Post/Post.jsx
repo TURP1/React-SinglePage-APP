@@ -4,8 +4,9 @@ import obj from './Post.module.css'
 const Post = (props) => {
 
     const PostImagesElement = props.postImagesData.map(img => {
+
         return (
-            <img className={obj.post__image} src={img.src} alt="" />
+            <img className={obj.post__image} key={img.id} src={img.src} alt="" />
         );
     });
 

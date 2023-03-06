@@ -28,7 +28,7 @@ const DialogUserMessages = (props) => {
 
   let dialogs = props.dialogsPageData.users[0].messagesData.map((message) => {
     return (
-      <DialogUserMessage message={message.message} id={message.id} user={message.user} />
+      <DialogUserMessage message={message.message} id={message.id} user={message.user} key={message.id} />
     )
   })
 

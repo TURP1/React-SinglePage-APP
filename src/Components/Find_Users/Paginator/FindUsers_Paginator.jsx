@@ -11,7 +11,7 @@ const Paginator = (props) => {
 
     let portionSize = 25;
     let portionCount = Math.ceil(pagesCount / portionSize);
-    const [currentPortion, setCurrentPortion] = useState(Math.ceil(props.userPage/portionSize) || 1);
+    const [currentPortion, setCurrentPortion] = useState(Math.ceil(props.userPage / portionSize) || 1);
 
 
     let leftPortionBorder = (currentPortion * portionSize) - (portionSize - 1);
@@ -19,21 +19,22 @@ const Paginator = (props) => {
 
     return <div className={obj.findUsers_pageNumber}>
         {currentPortion !== 1 &&
-          <button onClick={() => { setCurrentPortion(currentPortion - 1) }}>
-          prev
-          </button>
-          }
+            <button onClick={() => { setCurrentPortion(currentPortion - 1) }}>
+                prev
+            </button>
+        }
         {pages
             .filter((page) => page >= leftPortionBorder && page <= rightPortionBorder)
             .map((page) => {
                 return <span
+                    key={page}
                     onClick={(e) => { props.onPageChanged(page) }}
                     className={page === props.userPage ? obj.checkedPage : undefined}>{page}</span>
             })}
 
         {currentPortion < portionCount &&
-         <button onClick={() => { setCurrentPortion(currentPortion + 1) }}>
-            next
+            <button onClick={() => { setCurrentPortion(currentPortion + 1) }}>
+                next
             </button>}
     </div>
 }
