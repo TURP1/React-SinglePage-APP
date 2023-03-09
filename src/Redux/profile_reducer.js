@@ -7,6 +7,8 @@ const DELETE_POST = "DELETE_POST";
 const SET_CURRENT_PROFILE_REDUCER = "SET_CURRENT_PROFILE_REDUCER";
 const SET_CURRENT_PROFILE_STATUS = "SET_CURRENT_PROFILE_STATUS";
 const SET_NEW_IMAGE_SUCCESS = "SET_NEW_IMAGE_SUCCESS";
+const SET_CHANGE_PROFILE_INFO_SUCCESS = "SET_CHANGE_PROFILE_INFO_SUCCESS";
+
 
 
 
@@ -91,10 +93,22 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 currentProfileInfo: {
-                   ...state.currentProfileInfo, photos: {
-                    small: action.photo,
-                    large: action.photo
+                    ...state.currentProfileInfo, photos: {
+                        small: action.photo,
+                        large: action.photo
+                    }
                 }
+            }
+        }
+        case SET_CHANGE_PROFILE_INFO_SUCCESS: {
+            return {
+                ...state,
+                currentProfileInfo: {
+                    ...state.currentProfileInfo,
+                    fullName: action.data.fullName,
+                    aboutMe: action.data.aboutMe,
+                    lookingForAJob: action.data.lookingForAJob,
+                    lookingForAJobDescription: action.data.lookingForAJobDescription
                 }
             }
         }
@@ -118,6 +132,9 @@ const setCurrentProfileStatus = (status) => (
 
 const setNewImageSuccess = (photo) => (
     { type: SET_NEW_IMAGE_SUCCESS, photo });
+
+const setChangeProfileInfoSuccess = (data) => (
+    { type: SET_CHANGE_PROFILE_INFO_SUCCESS, data });
 
 
 
@@ -144,7 +161,7 @@ export const changeStatus = (status) => {
             dispatch(setCurrentProfileStatus(status));
         }
     }
-} 
+}
 
 export const changePicture = (photo) => {
     return async (dispatch) => {
@@ -154,6 +171,16 @@ export const changePicture = (photo) => {
         }
     }
 }
+
+export const changeProfileInfo = (data) => {
+    return async (dispatch) => {
+        let response = await profileAPI.changeProfileInfo(data)
+        if (response && response.data.resultCode === 0) {
+            dispatch(setChangeProfileInfoSuccess(data));
+        }
+    }
+}
+
 
 
 export const addNewPost = (text) => {

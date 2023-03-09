@@ -53,9 +53,15 @@ export const profileAPI = {
                 'Content-Type': 'multipart/form-data'
             }
         });
-        
+    },
+    changeProfileInfo(data) {
+        return instance.put(`profile`, {
+            AboutMe: data.aboutMe,
+            LookingForAJobDescription: data.lookingForAJobDescription,
+            FullName: data.fullName,
+            LookingForAJob: data.lookingForAJob
+        })
     }
-
 
 }
 
