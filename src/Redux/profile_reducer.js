@@ -1,4 +1,4 @@
-import { reset } from "redux-form";
+
 import { profileAPI } from "../API/api";
 
 
@@ -185,8 +185,7 @@ export const changeProfileInfo = (data) => {
 
 export const addNewPost = (text) => {
     return (dispatch) => {
-        dispatch(newPost(text))
-        dispatch(reset('postForm'))
+        dispatch(newPost(text));
     }
 }
 

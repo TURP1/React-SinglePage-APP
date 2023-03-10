@@ -1,7 +1,6 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import { Field, reduxForm } from 'redux-form';
-import { email, Input, maxLength15, minLength8, required } from "../common/FormControls/FormControls";
+
 import obj from "./Login.module.css"
 
 import { useForm } from 'react-hook-form';
