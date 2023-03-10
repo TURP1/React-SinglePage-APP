@@ -18,9 +18,6 @@ export function ProfileDetailsForm(props) {
         setValue('aboutMe', props.currentProfileInfo.aboutMe);
     }, [props])
 
-    
-
-
     return (
         <div>
             <form className="profile_details_form" onSubmit={handleSubmit((data) => {
