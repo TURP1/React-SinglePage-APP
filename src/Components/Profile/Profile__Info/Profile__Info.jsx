@@ -1,32 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
 import obj from './Profile__Info.module.css'
 
-import Status from './Profile__Status_WithHOOK';
+
 import ProfileAva from './Profile_Ava';
+import ProfileDetails from './Profile_Details';
+import { ProfileDetailsForm } from './Profile_Details_Form';
 
 
 const ProfileInfo = ({ currentProfileInfo, changePicture, ...props }) => {
 
-
+  let [editMode, setEditMode] = useState(false)
 
   return (
     <div className={obj.profile__info_container}>
-      <ProfileAva currentProfileInfo={currentProfileInfo} changePicture={changePicture} isOwner={props.isOwner}/>
-      <div className={obj.profile__info_details_container}>
-        <div className={obj.profile__info_details_container_row}>
-          <div className={obj.profile__info_details_name}>{currentProfileInfo.fullName}</div>
-          <div>{currentProfileInfo.lookingForAJob ? `looking for a job` : `not looking`}</div>
-        </div>
-        <Status
-          status={props.status}
-          changeStatus={props.changeStatus}
-        ></Status>
-        <div className={obj.profile__info_details_container_row}>
-          <div>{currentProfileInfo.aboutMe}</div>
-          <div>{currentProfileInfo.lookingForAJobDescription}</div>
-        </div>
-        <div className={obj.profile__info_details_social}>social</div>
-      </div>
+      <ProfileAva currentProfileInfo={currentProfileInfo} changePicture={changePicture} isOwner={props.isOwner} />
+      {!editMode
+        ? <>
+          <ProfileDetails currentProfileInfo={currentProfileInfo} {...props} />
+          <button onClick={() => { setEditMode(true) }}>Change Profile</button>
+        </>
+        : <ProfileDetailsForm setEditMode={setEditMode} currentProfileInfo={currentProfileInfo} 
+        changeProfileInfo={props.changeProfileInfo} />
+      }
 
     </div>
   );

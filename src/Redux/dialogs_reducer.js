@@ -1,4 +1,4 @@
-import { reset } from "redux-form";
+
 
 const NEW_MESSAGE = "NEW-MESSAGE";
 
@@ -64,7 +64,7 @@ const newMessage = (text) => ({ type: NEW_MESSAGE, newText: text });
 export const addNewMessage = (text) => {
     return(dispatch) => {
         dispatch(newMessage(text));
-        dispatch(reset('messageForm'));
+
     }
 }
 

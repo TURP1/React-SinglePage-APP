@@ -1,8 +1,10 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import { Field, reduxForm } from 'redux-form';
-import { email, Input, maxLength15, minLength8, required } from "../common/FormControls/FormControls";
+
 import obj from "./Login.module.css"
+
+import { useForm } from 'react-hook-form';
+
 
 let Error = props => {
     if (props.error) {
@@ -13,13 +15,12 @@ let Error = props => {
 
 }
 
-
 let Captcha = props => {
     if (props.captcha) {
         return <div>
             <img src={props.captcha} alt="captcha" />
             <div>
-                <Field component="input" type="text" name="captcha" />
+                <input type="text" name="captcha" {...props.register("captcha", { required: true })} />
             </div>
 
         </div>
@@ -27,39 +28,54 @@ let Captcha = props => {
 
 }
 
-let LoginForm = props => {
-    const { handleSubmit } = props
+function LoginForm(props) {
+    const {
+        register,
+        handleSubmit,
+        formState: { errors } } = useForm();
+    const onSubmit = data => {
+        props.onSubmit(data)
+    console.log(data);
+    console.log(errors);
+    }
 
-    return <form className={obj.loginForm}
+    return (
+
+        <form className={obj.loginForm} onSubmit={handleSubmit(onSubmit)}>
+
+            {errors.email?.type === "required" && <p className={obj.errorMessage}>Email is required</p>}
+            {errors.email?.type === "maxLength" && (
+                <p className={obj.errorMessage}>Email must be less than 20 characters</p>
+            )}
+            {errors.email?.type === "pattern" && (
+                <p className={obj.errorMessage}>Invalid email format</p>
+            )}
+            <label htmlFor="email">Email</label>
+            <input type="email" placeholder="Email" name="email" {...register("email", { required: true, maxLength: 20, pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i })} />
+
+
+            {errors.password?.type === "required"  && <p className={obj.errorMessage}>Password is required</p>}
+            {errors.password?.type === "maxLength" && (
+                <p className={obj.errorMessage}>Password must be less than 20 characters</p>
+            )}
+            {errors.password?.type === "minLength" && (
+                <p className={obj.errorMessage}>Password must be at least 8 characters</p>
+            )}
+            <label htmlFor="password">Password</label>
+            <input type="password" placeholder="Password" name="password" {...register("password", { required: true, maxLength: 20, minLength: 8 })} />
 
 
 
-        onSubmit={handleSubmit}>{
-            <>
+            <label htmlFor="rememberMe">RememberMe</label>
+            <input type="checkbox" placeholder="Remember me" name="rememberMe"  {...register("rememberMe", {})} />
 
-                <Field component={Input} type="email" name="email"
-                    placeholder="email" label="Email" validate={email} />
+            <Error error={props.isError}></Error>
+            <Captcha captcha={props.captcha} register={register}/>
 
-
-                <Field component={Input} type="password" name="password"
-                    placeholder="password" label="Password" validate={[required, maxLength15, minLength8]} />
-
-
-                <label htmlFor="rememberMe">RememberMe</label>
-                <Field component="input" type="checkbox" name="rememberMe"
-                    id="1" />
-                <Error error={props.isError}></Error>
-                <Captcha captcha={props.captcha} />
-                <button className={obj.submitBtn} type="submit">Submit</button>
-            </>
-
-        }</form>
+            <input type="submit" />
+        </form>
+    );
 }
-
-LoginForm = reduxForm({
-    form: 'login'
-})(LoginForm)
-
 
 export const Login = (props) => {
     if (props.isAuth) {
@@ -73,6 +89,9 @@ export const Login = (props) => {
         </div>
     )
 }
+
+
+
 
 
 
