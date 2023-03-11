@@ -41,6 +41,8 @@ let App = (props) => {
 
     <div className='app-wrapper__content'>
       <Routes>
+        <Route exact path='/' element={<ProfileContainer />} />
+        <Route path='/*' element={<div>Not Found</div>}>  </Route>
         <Route path='/profile/:UserId' element={<ProfileContainer />} />
         <Route path='/dialogs/*' element={<DialogsContainer />} />
         <Route path='/news' element={<News />} />
