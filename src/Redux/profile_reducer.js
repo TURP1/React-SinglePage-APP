@@ -3,8 +3,13 @@ import { profileAPI } from "../API/api";
 
 
 const NEW_POST = "NEW-POST";
+const DELETE_POST = "DELETE_POST";
 const SET_CURRENT_PROFILE_REDUCER = "SET_CURRENT_PROFILE_REDUCER";
-const SET_CURRENT_PROFILE_STATUS = "SET_CURRENT_PROFILE_STATUS"
+const SET_CURRENT_PROFILE_STATUS = "SET_CURRENT_PROFILE_STATUS";
+const SET_NEW_IMAGE_SUCCESS = "SET_NEW_IMAGE_SUCCESS";
+
+
+
 
 let initialState = {
     postsData: [
@@ -52,6 +57,12 @@ const profileReducer = (state = initialState, action) => {
                     newPostInfo]
             }
         }
+        case DELETE_POST: {
+            return {
+                ...state,
+                postsData: state.postsData.filter(p => p.id !== action.postId)
+            }
+        }
 
         case SET_CURRENT_PROFILE_REDUCER: {
             return {
@@ -76,19 +87,39 @@ const profileReducer = (state = initialState, action) => {
                 currentProfileStatus: action.status
             }
         }
+        case SET_NEW_IMAGE_SUCCESS: {
+            return {
+                ...state,
+                currentProfileInfo: {
+                   ...state.currentProfileInfo, photos: {
+                    small: action.photo,
+                    large: action.photo
+                }
+                }
+            }
+        }
+
         default:
             return state;
     }
 };
 
-const newPost = (text) => (
+export const newPost = (text) => (
     { type: NEW_POST, newText: text });
+
+export const deletePost = (postId) => (
+    { type: DELETE_POST, postId });
 
 const setCurrentProfileInfo = (profile) => (
     { type: SET_CURRENT_PROFILE_REDUCER, profile });
 
 const setCurrentProfileStatus = (status) => (
     { type: SET_CURRENT_PROFILE_STATUS, status });
+
+const setNewImageSuccess = (photo) => (
+    { type: SET_NEW_IMAGE_SUCCESS, photo });
+
+
 
 export const getUser = (userId) => {
     return (dispatch) => {
@@ -98,36 +129,38 @@ export const getUser = (userId) => {
             })
     }
 }
-export const getStatus = (userId) => {
-    return (dispatch) => {
-        profileAPI.getStatus(userId)
-            .then(response => {
-                dispatch(setCurrentProfileStatus(response.data));
-            })
-    }
-}
-export const changeStatus = (status) => {
-    return (dispatch) => {
-        profileAPI.changeStatus(status)
-            .then(response => {
-                if (response.resultCode === 0) {
-                    dispatch(setCurrentProfileStatus(response.data));
-                }
 
-            })
+export const getStatus = (userId) => {
+    return async (dispatch) => {
+        let response = await profileAPI.getStatus(userId)
+        dispatch(setCurrentProfileStatus(response.data));
     }
 }
+
+export const changeStatus = (status) => {
+    return async (dispatch) => {
+        let response = await profileAPI.changeStatus(status)
+        if (response.data.resultCode === 0) {
+            dispatch(setCurrentProfileStatus(status));
+        }
+    }
+} 
+
+export const changePicture = (photo) => {
+    return async (dispatch) => {
+        let response = await profileAPI.changePicture(photo)
+        if (response && response.data.resultCode === 0) {
+            dispatch(setNewImageSuccess(response.data.data.photos.large));
+        }
+    }
+}
+
+
 export const addNewPost = (text) => {
     return (dispatch) => {
         dispatch(newPost(text))
         dispatch(reset('postForm'))
     }
-
 }
-
-
-
-
-
 
 export default profileReducer;

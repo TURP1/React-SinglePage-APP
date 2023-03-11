@@ -1,31 +1,29 @@
 import React from 'react'
 import obj from './Profile__Info.module.css'
-import defaultAva from '../../../assets/images/default_photo.jpg'
-import StatusC from './Profile__Status';
 
-const ProfileInfo = (props) => {
+import Status from './Profile__Status_WithHOOK';
+import ProfileAva from './Profile_Ava';
+
+
+const ProfileInfo = ({ currentProfileInfo, changePicture, ...props }) => {
 
 
 
   return (
     <div className={obj.profile__info_container}>
-      <div className={obj.profile__info_avatar}>
-        <img alt="avatar" src={props.currentProfileInfo.photos.large
-          ? props.currentProfileInfo.photos.large
-          : defaultAva} />
-      </div>
+      <ProfileAva currentProfileInfo={currentProfileInfo} changePicture={changePicture} isOwner={props.isOwner}/>
       <div className={obj.profile__info_details_container}>
         <div className={obj.profile__info_details_container_row}>
-          <div className={obj.profile__info_details_name}>{props.currentProfileInfo.fullName}</div>
-          <div>{props.currentProfileInfo.lookingForAJob ? `looking for a job` : `not looking`}</div>
+          <div className={obj.profile__info_details_name}>{currentProfileInfo.fullName}</div>
+          <div>{currentProfileInfo.lookingForAJob ? `looking for a job` : `not looking`}</div>
         </div>
-        <StatusC aboutMe = {props.currentProfileInfo.aboutMe}
-        status = {props.status}
-        changeStatus= {props.changeStatus}
-      ></StatusC>
+        <Status
+          status={props.status}
+          changeStatus={props.changeStatus}
+        ></Status>
         <div className={obj.profile__info_details_container_row}>
-          <div>{props.currentProfileInfo.aboutMe}</div>
-          <div>{props.currentProfileInfo.lookingForAJobDescription}</div>
+          <div>{currentProfileInfo.aboutMe}</div>
+          <div>{currentProfileInfo.lookingForAJobDescription}</div>
         </div>
         <div className={obj.profile__info_details_social}>social</div>
       </div>

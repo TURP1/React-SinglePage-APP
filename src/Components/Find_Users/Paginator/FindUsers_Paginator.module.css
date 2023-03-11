@@ -1,0 +1,12 @@
+.findUsers_pageNumber{
+    display: flex;
+    width: 800px;
+    flex-wrap: wrap;
+    gap: 3px;
+}
+.checkedPage{
+    font-weight: bold;
+}
+
+
+

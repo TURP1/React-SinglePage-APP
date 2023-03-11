@@ -5,20 +5,27 @@ import { loginMe } from '../../Redux/auth_reducer'
 import { Login } from "./Login";
 
 
- const LoginContainer = (props) => {
+const LoginContainer = (props) => {
     const submit = values => {
-        let { email, password, rememberMe } = values
-        console.log(email, password, rememberMe)
-        props.loginMe(email, password, rememberMe)
+        let { email, password, rememberMe, captcha } = values
+        props.loginMe(email, password, rememberMe, captcha)
     }
     return (
         <>
-            <Login onSubmit={submit} />
+            <Login onSubmit={submit} isAuth={props.isAuth} myId={props.myId}
+             captcha={props.captcha} error={props.error}/>
         </>
 
     )
 }
+const mapStateToProps = (state) => (
+    { isAuth: state.authReducer.isAuth,
+        myId: state.authReducer.id,
+        captcha: state.authReducer.captcha,
+        error:state.authReducer.errorMessage }
+)
+    
 
 export default compose(
-    connect(null, { loginMe })
+    connect(mapStateToProps, { loginMe })
 )(LoginContainer)

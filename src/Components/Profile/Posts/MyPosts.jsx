@@ -29,7 +29,7 @@ const MyPosts = (props) => {
     const PostElement = props.postsData.map((post) => {
 
         return (
-            <Post message={post.message} likeCount={post.likeCount} postImagesData={props.postImageData} />
+            <Post message={post.message} key={post.id} likeCount={post.likeCount} postImagesData={props.postImageData} />
         );
     });
 

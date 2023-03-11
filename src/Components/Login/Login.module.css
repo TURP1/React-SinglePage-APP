@@ -8,3 +8,11 @@
     padding-left: 43%;
 
 }
+.errorMessage{
+  color: red;
+  padding: 5px;
+
+}
+.submitBtn{
+    margin-top: 10px;
+}
