@@ -33,9 +33,6 @@ const Users = (props) => {
                         </div>
                     </div>
                     <div className={obj.findUsers_info_location}>
-                        <div>
-                            {`u.location.country`}</div>
-                        <div>{`u.location.city`}</div>
                     </div>
                 </div>
             </div>

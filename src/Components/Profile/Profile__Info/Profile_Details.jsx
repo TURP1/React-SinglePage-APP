@@ -13,8 +13,8 @@ const ProfileDetails = (props) => {
       changeStatus={props.changeStatus}
     ></Status>
     <div className={obj.profile__info_details_container_row}>
-      <div>{props.currentProfileInfo.aboutMe}</div>
-      <div>{props.currentProfileInfo.lookingForAJobDescription}</div>
+      <div>{`About Me: `}{props.currentProfileInfo.aboutMe}</div>
+      <div>{`Skills Description: `}{props.currentProfileInfo.lookingForAJobDescription}</div>
     </div>
     <div className={obj.profile__info_details_social}>social</div>
   </div>

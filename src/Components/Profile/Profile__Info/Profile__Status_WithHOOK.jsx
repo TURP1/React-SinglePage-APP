@@ -28,6 +28,7 @@ const Status = (props) => {
     return <div className={obj.profile__info_details_status}>
         {!editMode
             ? <div >
+                {`Status: `}
                 <span onClick={changeEditMode}>{props.status}</span>
             </div>
             : < div >
